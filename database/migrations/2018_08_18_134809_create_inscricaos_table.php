@@ -19,10 +19,10 @@ class CreateInscricaosTable extends Migration
             $table->integer('AVALIACAO_ID');
             $table->integer('PAGAMENTO');
             $table->date('PAGAMENTO_DATA')->nullable();
-            $table->foreign('CANDIDATO_ID')->references('ID')->on('candidatos');
-            $table->foreign('AVALIACAO_ID')->references('ID')->on('avaliacaos');
+            //$table->foreign('CANDIDATO_ID')->references('ID')->on('candidatos');
+            //$table->foreign('AVALIACAO_ID')->references('ID')->on('avaliacaos');
         });
-        \Illuminate\Support\Facades\DB::statement('ALTER TABLE inscricaos AUTO_INCREMENT = 201900001;');
+        \Illuminate\Support\Facades\DB::statement('ALTER TABLE inscricaos AUTO_INCREMENT = 202000001;');
     }
 
     /**
