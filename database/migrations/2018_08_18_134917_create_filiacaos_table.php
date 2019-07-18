@@ -23,8 +23,8 @@ class CreateFiliacaosTable extends Migration
             $table->date('DTNASC_2');
             $table->string('NATCID_2');
             $table->string('NATEST_2');
-            $table->bigInteger('CANDIDATO_ID');
-            //$table->foreign('CANDIDATO_ID')->references('ID')->on('candidatos');
+            $table->unsignedInteger('CANDIDATO_ID');
+            $table->foreign('CANDIDATO_ID')->references('ID')->on('candidatos');
 
         });
     }

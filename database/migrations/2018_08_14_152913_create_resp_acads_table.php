@@ -21,8 +21,8 @@ class CreateRespAcadsTable extends Migration
             $table->string('EMAIL');
             $table->string('NATCID');
             $table->string('NATEST');
-            $table->bigInteger('RESPFIN_CPF');
-            //$table->foreign('RESPFIN_CPF')->references('CPF')->on('resp_fins');
+            $table->unsignedInteger('RESPFIN_CPF');
+            $table->foreign('RESPFIN_CPF')->references('CPF')->on('resp_fins')->onDelete('cascade');
         });
     }
 

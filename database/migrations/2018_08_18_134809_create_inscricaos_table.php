@@ -15,12 +15,12 @@ class CreateInscricaosTable extends Migration
     {
         Schema::create('inscricaos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('CANDIDATO_ID');
-            $table->integer('AVALIACAO_ID');
+            $table->unsignedInteger('CANDIDATO_ID');
+            $table->unsignedInteger('AVALIACAO_ID');
             $table->integer('PAGAMENTO');
             $table->date('PAGAMENTO_DATA')->nullable();
-            //$table->foreign('CANDIDATO_ID')->references('ID')->on('candidatos');
-            //$table->foreign('AVALIACAO_ID')->references('ID')->on('avaliacaos');
+            $table->foreign('CANDIDATO_ID')->references('ID')->on('candidatos')->onDelete('cascade');
+            $table->foreign('AVALIACAO_ID')->references('ID')->on('avaliacaos')->onDelete('cascade');
         });
         \Illuminate\Support\Facades\DB::statement('ALTER TABLE inscricaos AUTO_INCREMENT = 202000001;');
     }
