@@ -26,7 +26,7 @@ class CreateCandidatosTable extends Migration
             $table->string('TEL');
             $table->boolean('EXALUNO');
             $table->string('NEC_ESP')->nullable();
-            $table->unsignedInteger('RESPFIN_CPF');
+            $table->unsignedBigInteger('RESPFIN_CPF');
             $table->foreign('RESPFIN_CPF')->references('CPF')->on('resp_fins')->onDelete('cascade');
             $table->unsignedInteger('ESCOLARIDADE_ID');
             $table->foreign('ESCOLARIDADE_ID')->references('id')->on('escolaridades')->onDelete('cascade');
