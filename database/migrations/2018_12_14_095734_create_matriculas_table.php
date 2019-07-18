@@ -16,7 +16,7 @@ class CreateMatriculasTable extends Migration
         Schema::create('matriculas', function (Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('inscricao_id');
-            $table->foreign('inscricao_id')->references('id')->on('inscricaos');
+            //$table->foreign('inscricao_id')->references('id')->on('inscricaos');
             $table->string('user');
             $table->timestamps();
         });
