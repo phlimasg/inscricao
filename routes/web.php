@@ -1,4 +1,5 @@
 <?php
+use App\Mail\InscricaoConcluido;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +13,10 @@
 */
 Route::get('/', function () {
     return view('public.login');
+});
+Route::get('/mail', function () {
+    Mail::to('raphael.oliveira@lasalle.org.br')    
+    ->queue(new InscricaoConcluido());
 });
 
 Route::post('/validaCpf', 'respFinController@validaCpf')->name('validaCpf');
