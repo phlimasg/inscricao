@@ -80,7 +80,7 @@ class candidatoController extends Controller
         if($qtd == null or $qtd->VAGAS > 0){
             $a = avaliacao::where('DTLIMITE_INSC','>',date('Y-m-d'))
                 ->orderBy('DTLIMITE_INSC')
-                ->limit(2)
+                ->limit(1)
                 ->get();
             // dd($a);
             return view('public.data', compact(['a','cpf','id_candidato']));
