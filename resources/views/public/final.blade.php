@@ -53,7 +53,7 @@
                    1. Apresentação do resultado final do candidato (Boletim ou Declaração até o dia 21 de dezembro), caso contrário o aluno não será enturmado.<br>
                    2. Esclarecemos que, de acordo com a legislação vigente, a matrícula será efetivada após a entrega da transferência (Histórico Escolar original).<br>
                    <br>
-                   Clique <a href="{{url('/painel/'.$c->CPF)}}">aqui</a> para maiores informações. <br> <br>
+                   <!--Clique <a href="{{url('/painel/'.$c->CPF)}}">aqui</a> para maiores informações. <br> <br> -->
 
                </div>
            </div>
