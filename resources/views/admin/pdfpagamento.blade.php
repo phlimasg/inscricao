@@ -14,7 +14,7 @@
     <br>
     <hr>
 Confirmo o pagamento e a inscrição de <b style="text-transform: uppercase">{{$insc->CNOME}}</b> candidato à/ao {{$insc->ANO}} do/da {{$insc->ESCOLARIDADE}}.<br>
-    Data da prova  {{$insc->DTPROVA}} <br>
+    Data da prova:  {{date('d/m/Y', strtotime($insc->DTPROVA))}}<br>
     Local: Av. Roberto Silveira, 29 - Icaraí - Niterói/RJ
     <div align="right">
         Niterói, {{date('d/m/Y')}}<br><br>
@@ -36,7 +36,7 @@ Confirmo o pagamento e a inscrição de <b style="text-transform: uppercase">{{$
     <br>
     <hr>
     Confirmo o pagamento e a inscrição de <b style="text-transform: uppercase">{{$insc->CNOME}}</b> candidato à/ao {{$insc->ANO}} do/da {{$insc->ESCOLARIDADE}}.<br>
-    Data da prova  {{$insc->DTPROVA}} <br>
+    Data da prova:  {{date('d/m/Y', strtotime($insc->DTPROVA))}} <br>
     Local: Av. Roberto Silveira, 29 - Icaraí - Niterói/RJ
     <div align="right">
         Niterói, {{date('d/m/Y')}}<br><br>
