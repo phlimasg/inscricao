@@ -62,6 +62,11 @@
                     <button type="button" class="btn btn-lg btn-danger btn-login">NOVO CANDIDATO</button>
                 </a>
             </div>
+            <div class="row">
+                <a href="{{url('/')}}">
+                    <button type="button" class="btn btn-lg btn-primary btn-login">FINALIZAR</button>
+                </a>
+            </div>
         </div>
     </div>
 @endsection()

@@ -16,7 +16,7 @@
                    @csrf
                     <div class="row">
                         <div class="col-sm-4">
-                            <label for="esc">escolaridade</label>
+                            <label for="esc">escolaridade pretendida</label>
                             <select name="esc" id="esc" class="form-control">
                                 <option value=""></option>
                                 @foreach($escolaridade as $e)
