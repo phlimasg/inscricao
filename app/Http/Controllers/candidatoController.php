@@ -73,17 +73,22 @@ class candidatoController extends Controller
     }
     public function diaProva($cpf, $id_candidato){
         $esc_id = candidato::select('ESCOLARIDADE_ID')->where('id',$id_candidato)->first();
+        $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $esc_id->ESCOLARIDADE_ID)->first();        
         $qtd = inscricaoQtdView::selectRaw('(QTD_VAGAS-QTD_INSCRITOS) AS VAGAS')
             ->where('ID',$esc_id->ESCOLARIDADE_ID)
             ->first();
         //dd($qtd, $esc_id);
-        if($qtd == null or $qtd->VAGAS > 0){
-            $a = avaliacao::where('DTLIMITE_INSC','>',date('Y-m-d'))
-                ->orderBy('DTLIMITE_INSC')
-                ->limit(1)
-                ->get();
-            // dd($a);
-            return view('public.data', compact(['a','cpf','id_candidato']));
+        if($esc_vag->QTD_VAGAS > 0){
+            if($qtd == null or $qtd->VAGAS > 0){
+                $a = avaliacao::where('DTLIMITE_INSC','>',date('Y-m-d'))
+                    ->orderBy('DTLIMITE_INSC')
+                    ->limit(1)
+                    ->get();
+                // dd($a);
+                return view('public.data', compact(['a','cpf','id_candidato']));
+            }
+            else
+            return view('public.esgotado', compact(['a','cpf','id_candidato']));
         }
         else
             return view('public.esgotado', compact(['a','cpf','id_candidato']));
