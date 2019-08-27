@@ -24,12 +24,12 @@
 
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'Hours per Day'],
-                ['Pagamentos',      {{$qtdPg}}],
-                ['inscrições efetuadas',     {{$inscCount}}]
+                ['Pagas',      {{$qtdPg}}],
+                ['Não Pagas',     {{$inscCount - $qtdPg}}]
             ]);
 
             var options = {
-                title: 'Inscrições',
+                title: 'Total de Inscrições: {{$inscCount}}',
                 is3D: true,
 
             };
