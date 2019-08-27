@@ -21,10 +21,26 @@
                        </div>
                    </div>
                     <div class="row">
-                        <button type="submit" class="btn btn-lg btn-danger btn-login">SALVAR</button>
+                        <button type="submit" data-toggle="modal" data-target="#fim" class="btn btn-lg btn-danger btn-login">SALVAR</button>
                     </div>
                 </div>
             </div>
-
+            <div id="fim" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                  
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          
+                          <h4 class="modal-title">Salvando dados</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p>Aguarde, finalizando a inscrição.</p>
+                          <img src="https://media.giphy.com/media/jAYUbVXgESSti/source.gif" alt="" class="img-responsive">
+                        </div>
+                      </div>
+                  
+                    </div>
+                  </div>
     </form>
 @endsection()

@@ -7,7 +7,7 @@
         <div class="container text-justify">
            <div class="row">
                <div class="col-sm-12">
-                   Prezado(a), <br><br>
+                   Prezado(a) {{$c->FINNOME}}, <br><br>
                    Confirmamos os dados para a inscrição do aluno(a) {{$c->CNOME}}.<br>
                    <div style="color: #003c7f; background: white; padding: 15px">
 

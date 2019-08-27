@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Model\inscricaoView;
 
 class InscricaoConcluido extends Mailable
 {
@@ -16,9 +17,10 @@ class InscricaoConcluido extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public $c;
+    public function __construct(inscricaoView $c)
     {
-        //
+        $this->c = $c;
     }
 
     /**
@@ -27,10 +29,11 @@ class InscricaoConcluido extends Mailable
      * @return $this
      */
     public function build()
-    {
-        return $this->from('sendmail@abel.org.br')
-        ->subject('La Salle Abel - Estamos quase lá!')
+    {        
+        //return $this->view('mail.concluido',compact('c'));
+        //$c = $incricao;
+        return $this->subject(ucwords($this->c->FINNOME).', estamos quase lá!')
         ->replyTo('atendimento.abel@lasalle.org.br')
-                ->view('mail.concluido');
+        ->view('mail.concluido');
     }
 }
