@@ -56,27 +56,35 @@ class tesourariaController extends Controller
         $vagas = inscricaoQtdView::selectRaw('SUM(QTD_VAGAS - QTD_INSCRITOS) AS VAGAS')
             ->where('ID',$id_esc->ID_ESC)
             ->first();
-        //dd($vagas);
-        if($vagas->VAGAS == null || $vagas->VAGAS > 0){
-            $pg = inscricao::where('id',$insc)
-                ->first();
-            $pg->PAGAMENTO = 1;
-            $pg->PAGAMENTO_DATA = date('Y-m-d');
-            $pg->save();
-            $mpdf = new Mpdf();
-            $insc = inscricaoView::where('NINSC',$insc)
-                ->groupBy('NINSC')
-                ->first();
-            $mpdf->WriteHTML(view('admin.pdfpagamento',compact('insc')));
-            $mpdf->AddPage();
-            $mpdf->WriteHTML('<div align="center">VIA DA SECRETARIA</div>');
-            $mpdf->WriteHTML(view('public.pdf',compact('insc')));
-            return $mpdf->Output();
+
+        $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $id_esc->ID_ESC)->first();   
+        //dd($esc_vag,$id_esc)     ;
+        if($esc_vag->QTD_VAGAS > 0){
+            if($vagas->VAGAS == null || $vagas->VAGAS > 0){
+                $pg = inscricao::where('id',$insc)
+                    ->first();
+                $pg->PAGAMENTO = 1;
+                $pg->PAGAMENTO_DATA = date('Y-m-d');
+                $pg->save();
+                $mpdf = new Mpdf();
+                $insc = inscricaoView::where('NINSC',$insc)
+                    ->groupBy('NINSC')
+                    ->first();
+                $mpdf->WriteHTML(view('admin.pdfpagamento',compact('insc')));
+                $mpdf->AddPage();
+                $mpdf->WriteHTML('<div align="center">VIA DA SECRETARIA</div>');
+                $mpdf->WriteHTML(view('public.pdf',compact('insc')));
+                return $mpdf->Output();
+            }
+            else{
+                $vagas = 1;
+                return redirect()->route('pagamento', ['vagas' => $vagas]);
+            }        
         }
         else{
             $vagas = 1;
             return redirect()->route('pagamento', ['vagas' => $vagas]);
-        }
+        }    
 
 
     }
