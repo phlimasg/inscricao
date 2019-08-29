@@ -28,8 +28,7 @@
                 <li><a href="{{url('/home')}}">Home</a></li>
                 <li><a href="{{url('/home/secretaria')}}">Secretaria</a></li>
                 <li ><a href="{{url('/home/pagamento')}}">Tesouraria</a></li>
-                <li class="active"><a href="{{url('/home/central')}}">Central de Atendimento</a></li>
-                <li><a href="{{url('/home/config')}}"> <span class="glyphicon glyphicon-cog"></span></a></li>
+                <li class="active"><a href="{{url('/home/central')}}">Central de Atendimento</a></li>                
             </ul>
         </div>
     </div>
@@ -40,7 +39,7 @@
             <p><a href="{{url('/home/procurar')}}">Consulta de Dados</a></p>
             <p><a href="{{url('/home/pagamento')}}">Lista de Espera</a></p>
             <p><a href="{{url('/home/central/matricula')}}">Matricular Candidato</a></p>
-            <p><a href="{{url('/home/pagamento')}}">Controle de Pagamentos</a></p>
+            <p><a href="{{url('/home/central/emailInteresse')}}" class="text-danger">Temp - Cad. Interesse</a></p>
         </div>
         <div class="col-sm-10 text-left">
 @yield('content')

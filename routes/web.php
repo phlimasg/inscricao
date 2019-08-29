@@ -1,5 +1,5 @@
 <?php
-use App\Mail\InscricaoConcluido;
+//use App\Mail\InscricaoConcluido;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +13,6 @@ use App\Mail\InscricaoConcluido;
 */
 Route::get('/', function () {
     return view('public.login');
-});
-Route::get('/mail', function () {
-    Mail::to('raphael.oliveira@lasalle.org.br')    
-    ->queue(new InscricaoConcluido());
 });
 
 Route::post('/validaCpf', 'respFinController@validaCpf')->name('validaCpf');
@@ -64,7 +60,8 @@ Route::group(['prefix'=>'/home'], function (){
     Route::get('central/matricula','matriculaController@index');
     Route::post('central/matricula','matriculaController@store');
     Route::get('central/matricula/{id}','matriculaController@create');
-    
+    Route::get('central/emailInteresse','emailController@cad_interesse');
+    Route::post('central/emailInteresse','emailController@cad_interesse_send');
     Route::get('config','configController@index');
 });
 Route::get('/login','Auth\googleController@redirectToProvider');
