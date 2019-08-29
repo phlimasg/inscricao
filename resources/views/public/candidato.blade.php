@@ -276,12 +276,35 @@
 
         </div>
     </div>
+
+    <!-- Modal -->
+<div id="aviso" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Aviso!</h4>
+        </div>
+        <div class="modal-body">
+          <p>Os casos de candidatos fora da faixa etária serão aceitos mediante comprovação escolar, conforme legislação vigente.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+
     </div>
 
 
     </div>
 
     <script>
+        $("#aviso").modal();
         $(function($){
             var SPMaskBehavior = function (val) {
                     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
