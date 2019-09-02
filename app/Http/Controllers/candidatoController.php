@@ -87,11 +87,20 @@ class candidatoController extends Controller
                 // dd($a);
                 return view('public.data', compact(['a','cpf','id_candidato']));
             }
-            else
-            return view('public.esgotado', compact(['a','cpf','id_candidato']));
+            else{
+                $candidato = candidato::where('id',$id_candidato)->first();
+                $candidato->espera = 1;
+                $candidato->save();
+                return view('public.esgotado', compact(['a','cpf','id_candidato']));
+            }
         }
-        else
-            return view('public.esgotado', compact(['a','cpf','id_candidato']));
+        else{
+            $candidato = candidato::where('id',$id_candidato)->first();
+                $candidato->espera = 1;
+                $candidato->save();
+                return view('public.esgotado', compact(['a','cpf','id_candidato']));
+        }
+            
 
     }
 

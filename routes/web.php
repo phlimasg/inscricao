@@ -56,7 +56,9 @@ Route::group(['prefix'=>'/home'], function (){
     Route::post('secretaria/avaliacaodata/salvar','secretariaController@alterarDataSave')->name('alterarDataSave');
     Route::get('secretaria/presenca/{id}','secretariaController@lstPresenca')->name('lstPresenca');
     Route::get('secretaria/etiqueta/{id}','secretariaController@etiqueta')->name('etiqueta');
+    //Central
     Route::get('central','centralController@index');
+    Route::get('central/espera','centralController@espera');
     Route::get('central/matricula','matriculaController@index');
     Route::post('central/matricula','matriculaController@store');
     Route::get('central/matricula/{id}','matriculaController@create');
