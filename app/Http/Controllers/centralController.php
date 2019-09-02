@@ -26,11 +26,12 @@ class centralController extends Controller
     }
     public function espera()
     {
-        $lista = candidato::whereNotIn('candidatos.id',
-            inscricao::select('CANDIDATO_ID')->get()
-        )
+        $lista = candidato::where('candidatos.ESPERA',1)
         ->select('candidatos.id','candidatos.NOME','escolaridades.ESCOLARIDADE','escolaridades.ANO','escolaridades.TURNO')
         ->join('escolaridades','candidatos.ESCOLARIDADE_ID','escolaridades.id')
+        ->join('resp_fins','candidatos.RESPFIN_CPF','resp_fins.CPF')
+        ->join('resp_acads','candidatos.RESPFIN_CPF','resp_acads.RESPFIN_CPF')
+        ->groupBy('candidatos.id')
         ->orderBy('escolaridades.ESCOLARIDADE')
         ->orderBy('escolaridades.ANO')
         ->orderBy('escolaridades.TURNO')
