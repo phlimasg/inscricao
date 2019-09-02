@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\InscricaoConcluido;
 use App\Model\avaliacao;
+use App\Model\candidato;
 use App\Model\escolaridade;
 use App\Model\inscricao;
 use App\Model\inscricaoQtdView;
@@ -29,6 +30,9 @@ class inscricaoController extends Controller
                 $i->PAGAMENTO = 0;
                 $i->PAGAMENTO_DATA = null;
                 $i->save();
+                $candidato = candidato::where('id',$request->id_candidato)->first();
+                $candidato->espera = 0;
+                $candidato->save();
                 $c = inscricaoView::where('id',$i->CANDIDATO_ID)
                 ->groupBy('id')
                 ->first();
