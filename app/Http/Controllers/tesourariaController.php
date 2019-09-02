@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Model\avaliacao;
+use App\Model\candidato;
 use App\Model\escolaridade;
 use App\Model\inscricao;
 use App\Model\inscricaoQtdView;
@@ -77,11 +78,19 @@ class tesourariaController extends Controller
                 return $mpdf->Output();
             }
             else{
+                $cand = inscricao::where('id',$insc)->first();
+                $candidato = candidato::where('id',$cand->CANDIDATO_ID)->first();
+                $candidato->espera = 1;
+                $candidato->save();
                 $vagas = 1;
                 return redirect()->route('pagamento', ['vagas' => $vagas]);
             }        
         }
         else{
+            $cand = inscricao::where('id',$insc)->first();
+                $candidato = candidato::where('id',$cand->CANDIDATO_ID)->first();
+                $candidato->espera = 1;
+                $candidato->save();
             $vagas = 1;
             return redirect()->route('pagamento', ['vagas' => $vagas]);
         }    
