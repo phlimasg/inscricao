@@ -12,6 +12,7 @@
         <br>
         <div class="alert alert-danger">
             <h2>Pagamento não efetuado!</h2>
+            <h3>O candidato foi inserido na lista de espera.</h3>
             <strong>Ooops,</strong> tivemos problemas com o preenchimento da data de nascimento do candidato. <br>
             Por favor, direcione-se para a central de atendimento e faça um novo cadastro. :D
         </div>
