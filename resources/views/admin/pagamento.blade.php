@@ -3,16 +3,16 @@
     <h3>Controle de Pagamento</h3>
     @if(!empty($_GET['vagas']))
         <br>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger">            
             <strong>Desculpe,</strong> mas não há vagas para esse ano de escolaridade. <br>
-            clique <a href="{{url('/home')}}">aqui</a>  e veja a disponibilidade de outra turma.
+            Clique <a href="{{url('/home')}}">aqui</a>  e veja a disponibilidade de outra turma.
+            <h3>*O candidato foi inserido na lista de espera.</h3>
         </div>
     @endif
     @if(!empty($_GET['data']))
         <br>
         <div class="alert alert-danger">
-            <h2>Pagamento não efetuado!</h2>
-            <h3>O candidato foi inserido na lista de espera.</h3>
+            <h2>Pagamento não efetuado!</h2>            
             <strong>Ooops,</strong> tivemos problemas com o preenchimento da data de nascimento do candidato. <br>
             Por favor, direcione-se para a central de atendimento e faça um novo cadastro. :D
         </div>
