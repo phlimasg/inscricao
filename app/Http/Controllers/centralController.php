@@ -27,7 +27,9 @@ class centralController extends Controller
     public function espera()
     {
         $lista = candidato::where('candidatos.ESPERA',1)
-        ->select('candidatos.id','candidatos.NOME','escolaridades.ESCOLARIDADE','escolaridades.ANO','escolaridades.TURNO')
+        ->select('candidatos.id','candidatos.NOME','escolaridades.ESCOLARIDADE','escolaridades.ANO','escolaridades.TURNO',
+        'resp_acads.NOME as acadNome','resp_acads.EMAIL as acadEmail','resp_acads.TEL as acadTel',
+        'resp_fins.NOME as finNome','resp_fins.EMAIL as finEmail','resp_fins.TEL as finTel','resp_fins.CPF')
         ->join('escolaridades','candidatos.ESCOLARIDADE_ID','escolaridades.id')
         ->join('resp_fins','candidatos.RESPFIN_CPF','resp_fins.CPF')
         ->join('resp_acads','candidatos.RESPFIN_CPF','resp_acads.RESPFIN_CPF')
