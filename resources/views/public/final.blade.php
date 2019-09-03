@@ -11,7 +11,7 @@
                    Confirmamos os dados para a inscrição do aluno(a) {{$c->CNOME}}.<br>
                    <div style="color: #003c7f; background: white; padding: 15px">
 
-                       Lembramos que o prazo para pagamento da taxa no valor de <b>R$50,00</b> para a Avaliação Diagnóstica se encerra na quinta-feira <b>{{date('d/m/Y',strtotime('-2 days', strtotime($c->DTPROVA)))}}</b>.
+                       Lembramos que o pagamento da taxa no valor de <b>R$50,00</b> para a Avaliação Diagnóstica é condição para efetivar a inscrição.
                        <br>
                        A Avaliação ocorrerá no dia <b>{{date('d/m/Y', strtotime($c->DTPROVA))}}</b>, às <b>08:00</b> horas.
                        O pagamento deve ser feito na Tesouraria do Colégio. <br>
