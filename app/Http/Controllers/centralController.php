@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\candidato;
+use App\Model\filiacao;
 use App\Model\inscricao;
 use Illuminate\Http\Request;
 
@@ -47,6 +48,13 @@ class centralController extends Controller
         ->get();
         //dd($lista_insc);
         return view('admin.central_espera',compact('lista','lista_insc'));
+    }
+    public function esperaRemove($id)
+    {
+        inscricao::where('CANDIDATO_ID',$id)->delete();
+        filiacao::where('CANDIDATO_ID',$id)->delete();
+        candidato::where('id',$id)->delete();
+        return redirect()->back();
     }
 }
 

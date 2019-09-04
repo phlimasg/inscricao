@@ -59,6 +59,7 @@ Route::group(['prefix'=>'/home'], function (){
     //Central
     Route::get('central','centralController@index');
     Route::get('central/espera','centralController@espera');
+    Route::get('central/espera/{id}','centralController@esperaRemove');
     Route::get('central/matricula','matriculaController@index');
     Route::post('central/matricula','matriculaController@store');
     Route::get('central/matricula/{id}','matriculaController@create');
