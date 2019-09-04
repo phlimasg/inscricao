@@ -39,7 +39,14 @@ class centralController extends Controller
         ->orderBy('escolaridades.TURNO')
         ->orderBy('candidatos.id')
         ->get();
-        return view('admin.central_espera',compact('lista'));
+        
+        $lista_insc = candidato::join('inscricaos','candidatos.id','inscricaos.CANDIDATO_ID')
+        ->join('escolaridades','candidatos.ESCOLARIDADE_ID','escolaridades.id')
+        ->whereIn('RESPFIN_CPF',candidato::select('candidatos.RESPFIN_CPF')->where('candidatos.ESPERA',1)->get())
+        ->where('PAGAMENTO',1)
+        ->get();
+        //dd($lista_insc);
+        return view('admin.central_espera',compact('lista','lista_insc'));
     }
 }
 

@@ -23,6 +23,20 @@
                 <td>{{$i->TURNO}}</td>
                 <td><a href="/inscricao/candidato/prova/{{$i->CPF}}/{{$i->id}}" target="_blank"><i class="glyphicon glyphicon-calendar"></i></a></td>
               </tr>
+              @forelse ($lista_insc as $l)
+                @if ($i->CPF == $l->RESPFIN_CPF && $i->id != $l->CANDIDATO_ID)
+                <tr style="background-color: lightpink">
+                    <td>{{$l->id}}</td>
+                    <td><a href="/painel/{{$l->RESPFIN_CPF}}" target="_blank">{{$l->NOME}}</a></td>
+                    <td>{{$l->ESCOLARIDADE}}</td>
+                    <td>{{$l->ANO}}</td>
+                    <td>{{$l->TURNO}}</td>
+                    <td></td>
+                </tr> 
+                @endif                  
+              @empty
+                  
+              @endforelse
               
                 <div id="{{$i->id}}" class="modal fade" role="dialog">
                         <div class="modal-dialog modal-lg">
