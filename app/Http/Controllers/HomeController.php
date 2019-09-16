@@ -34,8 +34,9 @@ class HomeController extends Controller
             ->count();
         $pg = $pg::orderBy('ID')->get();
         //dd($pg);
-        $insc = inscricaoView::groupBy('id');
-        $inscCount = inscricao::count();
+        $insc = inscricaoView::where('PAGAMENTO_DATA','!=','0000-00-00')->groupBy('id');
+        $inscCount = inscricao::where('PAGAMENTO_DATA','!=','0000-00-00')->orWhere('PAGAMENTO_DATA',null)->count();
+        //dd($inscCount);
         $dtprova = avaliacao::get();
         /*$countDt = inscricaoView::selectRaw('DTPROVA,ESCOLARIDADE,count(*) as QTD')
             ->groupBy('DTPROVA')

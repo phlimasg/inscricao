@@ -56,5 +56,60 @@ class centralController extends Controller
         candidato::where('id',$id)->delete();
         return redirect()->back();
     }
+
+    public function naoPagos()
+    {
+        $naoPagos = inscricao::where('PAGAMENTO',0)
+        ->join('CANDIDATOS','CANDIDATO_ID','CANDIDATOS.id')
+        ->join('ESCOLARIDADES','ESCOLARIDADE_ID','ESCOLARIDADES.id')
+        ->join('resp_fins','candidatos.RESPFIN_CPF','resp_fins.CPF')
+        ->join('resp_acads','candidatos.RESPFIN_CPF','resp_acads.RESPFIN_CPF')
+        ->whereNotIn('CANDIDATO_ID',
+            candidato::select('id')->where('ESPERA',1)->get()
+        )
+        ->select('inscricaos.id','candidatos.NOME','escolaridades.ESCOLARIDADE','escolaridades.ANO','escolaridades.TURNO',
+        'resp_acads.NOME as acadNome','resp_acads.EMAIL as acadEmail','resp_acads.TEL as acadTel',
+        'resp_fins.NOME as finNome','resp_fins.EMAIL as finEmail','resp_fins.TEL as finTel','resp_fins.CPF'
+        )
+        ->where('PAGAMENTO_DATA',null)        
+        ->orderBy('ESCOLARIDADES.ESCOLARIDADE')
+        ->orderBy('ESCOLARIDADES.ANO')
+        ->orderBy('ESCOLARIDADES.TURNO')
+        ->orderBy('CANDIDATOS.NOME') 
+        ->groupBy('inscricaos.id')               
+        //->orderBy('ESCOLARIDADES.id')
+        /*->whereNotIn('CANDIDATOS.respfin_cpf',
+            candidato::select('respfin_cpf')
+            ->join('INSCRICAOS','CANDIDATOS.id','INSCRICAOS.CANDIDATO_ID')
+            ->where('INSCRICAOS.PAGAMENTO',1)
+            ->get()
+        )*/
+        ->paginate(10);
+
+        $total = inscricao::where('PAGAMENTO',0)        
+        ->whereNotIn('CANDIDATO_ID',
+            candidato::select('id')->where('ESPERA',1)->get()
+        )
+        
+        ->where('PAGAMENTO_DATA',null)        
+                 
+        //->orderBy('ESCOLARIDADES.id')
+        /*->whereNotIn('CANDIDATOS.respfin_cpf',
+            candidato::select('respfin_cpf')
+            ->join('INSCRICAOS','CANDIDATOS.id','INSCRICAOS.CANDIDATO_ID')
+            ->where('INSCRICAOS.PAGAMENTO',1)
+            ->get()
+        )*/
+        ->count();
+        return view('admin.central_n_pg',compact('naoPagos','total'));
+    }
+
+    public function removeInsc($id)
+    {
+        $insc = inscricao::find($id);
+        $insc->PAGAMENTO_DATA = '0000-00-00';
+        $insc->save();
+        return redirect()->back();
+    }
 }
 

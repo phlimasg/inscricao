@@ -60,6 +60,8 @@ Route::group(['prefix'=>'/home'], function (){
     Route::get('central','centralController@index');
     Route::get('central/espera','centralController@espera');
     Route::get('central/espera/{id}','centralController@esperaRemove');
+    Route::get('central/pagamento','centralController@naoPagos');
+    Route::get('central/pagamento/{id}','centralController@removeInsc');    
     Route::get('central/matricula','matriculaController@index');
     Route::post('central/matricula','matriculaController@store');
     Route::get('central/matricula/{id}','matriculaController@create');
