@@ -60,8 +60,8 @@ class centralController extends Controller
     public function naoPagos()
     {
         $naoPagos = inscricao::where('PAGAMENTO',0)
-        ->join('CANDIDATOS','CANDIDATO_ID','CANDIDATOS.id')
-        ->join('ESCOLARIDADES','ESCOLARIDADE_ID','ESCOLARIDADES.id')
+        ->join('candidatos','CANDIDATO_ID','CANDIDATOS.id')
+        ->join('escolaridades','ESCOLARIDADE_ID','ESCOLARIDADES.id')
         ->join('resp_fins','candidatos.RESPFIN_CPF','resp_fins.CPF')
         ->join('resp_acads','candidatos.RESPFIN_CPF','resp_acads.RESPFIN_CPF')
         ->whereNotIn('CANDIDATO_ID',
