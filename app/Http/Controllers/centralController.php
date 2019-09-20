@@ -64,6 +64,7 @@ class centralController extends Controller
         ->join('escolaridades','ESCOLARIDADE_ID','escolaridades.id')
         ->join('resp_fins','candidatos.RESPFIN_CPF','resp_fins.CPF')
         ->join('resp_acads','candidatos.RESPFIN_CPF','resp_acads.RESPFIN_CPF')
+        ->where('candidatos.ESPERA',0)
         ->whereNotIn('CANDIDATO_ID',
             candidato::select('id')->where('ESPERA',1)->get()
         )
@@ -86,7 +87,8 @@ class centralController extends Controller
         )*/
         ->paginate(10);
 
-        $total = inscricao::where('PAGAMENTO',0)        
+        $total = inscricao::where('PAGAMENTO',0) 
+        ->join('candidatos','CANDIDATO_ID','candidatos.id')       
         ->whereNotIn('CANDIDATO_ID',
             candidato::select('id')->where('ESPERA',1)->get()
         )
