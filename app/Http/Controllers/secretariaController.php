@@ -119,4 +119,43 @@ class secretariaController extends Controller
         else
             return redirect()->back()->withErrors('0');
     }
+
+    public function etiquetaKit($id){
+        $cabecalho = '<style>body{font-family: Tahoma;text-transform: uppercase;}table {border-collapse: collapse;}
+        tr {
+            border-collapse: collapse;
+            border: 1px solid black;
+        }
+        </style>
+            <table width="100%">';
+        $fim = '</table>';
+
+        $q = inscricaoView::where('ID_AVAL',$id)
+            ->where('PAGAMENTO',1)
+            ->orderby('ESCOLARIDADE')
+            ->orderby('ANO')
+            ->orderby('TURNO')
+            ->orderby('CNOME')
+            ->groupBy('NINSC')            
+            ->get();
+        $mpdf = new Mpdf(['orientation' => 'L']);
+
+        $mpdf->WriteHTML($cabecalho);
+        $count = 0;
+
+        foreach ($q as $a){
+            if($count == 0) {
+                $mpdf->WriteHTML('<tr style="border-right: 1px solid black;">');
+            }
+            $count++;
+            $mpdf->WriteHTML(view('admin.pdf.etiquetaKit', compact('a')));
+            if($count == 3){
+                $count = 0;
+                $mpdf->WriteHTML('</tr>');
+            }
+        }
+        $mpdf->WriteHTML($fim);
+        //$mpdf->WriteHTML(view('admin.pdf.etiqueta',compact('q')));
+        return $mpdf->Output();
+    }
 }
