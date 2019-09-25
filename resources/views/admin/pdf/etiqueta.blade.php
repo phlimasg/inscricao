@@ -1,59 +1,117 @@
-<!--<style>
-    body{
-        font-family: Tahoma;
-    }
-    table {
-        border-collapse: collapse;
-    }
-    tr {
-        border-collapse: collapse;
-        border: 1px solid black;
-    }
-</style>
-    <table width="33,33%">
-        <tr>-->
 @if(strcasecmp('EDUCAÇÃO INFANTIL',$a->ESCOLARIDADE)==0)
-            <td style="width: 8%; background-color: darkred; color: white" >
-                <img src="{{asset('images/logoabel2018br.png')}}" alt="" width="8%">
-            </td>
-            <td style="border-right: 1px solid white;width: 25%; background-color: darkred; color: white">{{$a->ANO}} | {{$a->ESCOLARIDADE}}<br>
-                <b>CANDIDATO:</b> <br> {{strtoupper($a->CNOME)}} <br>
-                <b>RESPONSÁVEL:</b> <br> {{strtoupper($a->FINNOME)}} <br>
-                <b>CONTATO:</b> {{$a->FINTEL}}
-            </td>
+    <td style="padding-right: 1%; width: 33%;">
+        <table style="width: 100%">
+            <tr style="border-collapse: collapse; border: 1px solid silver;">
+                <td style="color: black; background-color: brown; width: 35px;height: 140px;" valign="top">
+                    <img src="{{asset('images/logoabel2018fullbr.png')}}" alt="" style="width: 35px">
+                </td>
+                <td style="border-right: 1px solid white; color: black; " >
+                        <span style="font-size: 20px;">
+                            {{mb_strtoupper($a->CNOME)}}                                 
+                            </span>
+                        <br>
+                        <span style="font-size: 15px;">{{$a->ANO}} - {{$a->TURNO}}
+                                <br><br>
+                            </span>
+                            <b style="font-size: 10px;">
+                                    RESPONSÁVEL
+                            </b>
+                                <br>
+                            <span style="font-size: 15px;">
+                                {{mb_strtoupper($a->FINNOME)}} <br>
+                                {{$a->FINTEL}}
+                            </span>
+                </td>
+                   
+            </tr>           
+        </table>
+    </td>   
 @endif
+
+
 @if(strcasecmp('ENSINO FUNDAMENTAL I',$a->ESCOLARIDADE)==0)
-    <td style="width: 8%; background-color: #f1b107; color: white" >
-        <img src="{{asset('images/logoabel2018mono.png')}}" alt="" width="8%">
-    </td>
-    <td style="border-right: 1px solid white;width: 25%; background-color: #f1b107; color: white">{{$a->ANO}} | {{$a->ESCOLARIDADE}}<br>
-        <b>CANDIDATO:</b> <br> {{strtoupper($a->CNOME)}} <br>
-        <b>RESPONSÁVEL:</b> <br> {{strtoupper($a->FINNOME)}} <br>
-        <b>CONTATO:</b> {{$a->FINTEL}}
+<td style="padding-right: 1%; width: 33%">
+        <table style="width: 100%">
+            <tr style="border-collapse: collapse; border: 1px solid silver;">
+                <td style="color: black; background-color: #e5bd27; width: 35px;height: 140px;" valign="top">
+                    <img src="{{asset('images/logoabel2018fullbr.png')}}" alt="" style="width: 35px">
+                </td>
+                <td style="border-right: 1px solid white; color: black; " >
+                        <span style="font-size: 20px;">{{mb_strtoupper($a->CNOME)}}                                 
+                            </span>
+                        <br>
+                        <span style="font-size: 15px;">{{$a->ANO}} - {{$a->TURNO}}
+                                <br><br>
+                            </span>
+                            <b style="font-size: 10px;">
+                                    RESPONSÁVEL
+                            </b>
+                                <br>
+                            <span style="font-size: 15px;">
+                                {{mb_strtoupper($a->FINNOME)}} <br>
+                                {{$a->FINTEL}}
+                            </span>
+                </td>
+                   
+            </tr>           
+        </table>
     </td>
 @endif
 
 @if(strcasecmp('ENSINO FUNDAMENTAL II',$a->ESCOLARIDADE)==0)
-    <td style="width: 8%; background-color: #003c7f; color: white" >
-        <img src="{{asset('images/logoabel2018br.png')}}" alt="" width="8%">
-    </td>
-    <td style="border-right: 1px solid white;width: 25%; background-color: #003c7f; color: white">{{$a->ANO}} | {{$a->ESCOLARIDADE}}<br>
-        <b>CANDIDATO:</b> <br> {{strtoupper($a->CNOME)}} <br>
-        <b>RESPONSÁVEL:</b> <br> {{strtoupper($a->FINNOME)}} <br>
-        <b>CONTATO:</b> {{$a->FINTEL}}
+<td style="padding-right: 1%; width: 33%">
+        <table style="width: 100%">
+            <tr style="border-collapse: collapse; border: 1px solid silver;">
+                <td style="color: black; background-color: #114f9d; width: 35px;height: 140px;" valign="top">
+                    <img src="{{asset('images/logoabel2018fullbr.png')}}" alt="" style="width: 35px">
+                </td>
+                <td style="border-right: 1px solid white; color: black; " >
+                        <span style="font-size: 20px;">{{mb_strtoupper($a->CNOME)}}                                 
+                            </span>
+                        <br>
+                        <span style="font-size: 15px;">{{$a->ANO}} - {{$a->TURNO}}
+                                <br><br>
+                            </span>
+                            <b style="font-size: 10px;">
+                                    RESPONSÁVEL
+                            </b>
+                                <br>
+                            <span style="font-size: 15px;">
+                                {{mb_strtoupper($a->FINNOME)}} <br>
+                                {{$a->FINTEL}}
+                            </span>
+                </td>
+                   
+            </tr>           
+        </table>
     </td>
 @endif
 @if(strcasecmp('ENSINO MÉDIO',$a->ESCOLARIDADE)==0)
-    <td style="width: 8%; background-color: #4e555b; color: white" >
-        <img src="{{asset('images/logoabel2018br.png')}}" alt="" width="8%">
-    </td>
-    <td style="border-right: 1px solid white;width: 25%; background-color: #4e555b; color: white">{{$a->ANO}} | {{$a->ESCOLARIDADE}}<br>
-        <b>CANDIDATO:</b> <br> {{strtoupper($a->CNOME)}} <br>
-        <b>RESPONSÁVEL:</b> <br> {{strtoupper($a->FINNOME)}} <br>
-        <b>CONTATO:</b> {{$a->FINTEL}}
+<td style="padding-right: 1%; width: 33%">
+        <table style="width: 100%">
+            <tr style="border-collapse: collapse; border: 1px solid silver;">
+                <td style="color: black; background-color: #666666; width: 35px;height: 140px;" valign="top">
+                    <img src="{{asset('images/logoabel2018fullbr.png')}}" alt="" style="width: 35px">
+                </td>
+                <td style="border-right: 1px solid white; color: black; " >
+                        <span style="font-size: 20px;">{{mb_strtoupper($a->CNOME)}}                                 
+                            </span>
+                        <br>
+                        <span style="font-size: 15px;">{{$a->ANO}} - {{$a->TURNO}}
+                                <br><br>
+                            </span>
+                            <b style="font-size: 10px;">
+                                    RESPONSÁVEL
+                            </b>
+                                <br>
+                            <span style="font-size: 15px;">
+                                {{mb_strtoupper($a->FINNOME)}} <br>
+                                {{$a->FINTEL}}
+                            </span>
+                </td>
+                   
+            </tr>           
+        </table>
     </td>
 @endif
-<!--
-        </tr>
-    </table>
 

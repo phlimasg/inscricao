@@ -20,11 +20,7 @@
         <strong>{{strtoupper($a->CNOME)}}</strong> <br>
         <span style="font-size: 12px">
             {{$a->ESCOLARIDADE}} - {{$a->ANO}} <br> {{$a->TURNO}}
-        </span><br>
-        <span style="font-size: 12px">
-            RESPONSÁVEL:{{strtoupper($a->FINNOME)}} <br>
-        </span><br>
-        
+        </span><br>        
         <!--<b>CONTATO:</b> {{$a->FINTEL}}-->
     </td>
 

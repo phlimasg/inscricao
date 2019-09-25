@@ -61,8 +61,9 @@ class secretariaController extends Controller
         }
         return $mpdf->Output();
     }
-    public function etiqueta($id){
-        $cabecalho = '<style>body{font-family: Tahoma;text-transform: uppercase;}table {border-collapse: collapse;}
+
+    public function etiqueta_old($id){
+        $html = '<style>body{font-family: Tahoma;text-transform: uppercase;}table {border-collapse: collapse;}
         tr {
             border-collapse: collapse;
             border: 1px solid white;
@@ -75,24 +76,31 @@ class secretariaController extends Controller
             ->where('PAGAMENTO',1)
             ->orderby('CNOME')
             ->groupBy('NINSC')
+            ->limit(5)
             ->get();
 
         $mpdf = new Mpdf(['orientation' => 'L']);
 
-        $mpdf->WriteHTML($cabecalho);
+        //$mpdf->WriteHTML($cabecalho);
         $count = 0;
 
         foreach ($q as $a){
             if($count == 0) {
-                $mpdf->WriteHTML('<tr>');
+                //$mpdf->WriteHTML('<tr>');
+                $html.='<tr>';
             }
             $count++;
-            $mpdf->WriteHTML(view('admin.pdf.etiqueta', compact('a')));
+            //$mpdf->WriteHTML(view('admin.pdf.etiqueta', compact('a')));
+            $html.= view('admin.pdf.etiqueta', compact('a'));
             if($count == 3){
                 $count = 0;
-                $mpdf->WriteHTML('</tr>');
+                //$mpdf->WriteHTML('</tr>');
+                $html.='</tr>';
             }
         }
+        $html .= $fim;
+        echo $html;
+        return;
         $mpdf->WriteHTML($fim);
         //$mpdf->WriteHTML(view('admin.pdf.etiqueta',compact('q')));
         return $mpdf->Output();
@@ -155,6 +163,50 @@ class secretariaController extends Controller
             }
         }
         $mpdf->WriteHTML($fim);
+        //$mpdf->WriteHTML(view('admin.pdf.etiqueta',compact('q')));
+        return $mpdf->Output();
+    }
+
+    public function etiqueta($id){
+        $html = '<style>body{font-family: Tahoma;text-transform: uppercase; font-size: 45px}table {border-collapse: collapse;}
+        tr {
+            border-collapse: collapse;
+            border: 1px solid white;
+        }
+        </style>
+            <table width="100%">';
+        $fim = '</table>';
+
+        $q = inscricaoView::where('ID_AVAL',$id)
+            ->where('PAGAMENTO',1)
+            ->orderby('CNOME')
+            ->groupBy('NINSC')
+            //->limit(5)
+            ->get();
+
+        $mpdf = new Mpdf(['orientation' => 'L']);
+
+        //$mpdf->WriteHTML($cabecalho);
+        $count = 0;
+
+        foreach ($q as $a){
+            if($count == 0) {
+                //$mpdf->WriteHTML('<tr>');
+                $html.='<tr>';
+            }
+            $count++;
+            //$mpdf->WriteHTML(view('admin.pdf.etiqueta', compact('a')));
+            $html.= view('admin.pdf.etiqueta', compact('a'));
+            if($count == 3){
+                $count = 0;
+                //$mpdf->WriteHTML('</tr>');
+                $html.='</tr>';
+            }
+        }
+        $html .= $fim;
+        //echo $html;
+        //return;
+        $mpdf->WriteHTML($html);
         //$mpdf->WriteHTML(view('admin.pdf.etiqueta',compact('q')));
         return $mpdf->Output();
     }
