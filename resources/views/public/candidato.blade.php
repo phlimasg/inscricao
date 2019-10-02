@@ -36,7 +36,16 @@
                                 <option value=""></option>
                             </select>
                         </div>
+                        
                         <div id="result"></div>
+                    </div>
+                    <div class="row">
+                            <div class="col-sm-4">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" value="true" id="integral" >
+                                    COMPLEMENTAR/INTEGRAL?
+                                </label>
+                            </div>
                     </div>
                     <div id="dadosDoAluno" style="display: none">
                    <div class="row">
@@ -298,6 +307,28 @@
     </div>
   </div>
 
+  <div id="md_integral" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+      
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Turno Complementar</h4>
+            </div>
+            <div class="modal-body text-justify">
+              <p>Ao selecionar Turno Complementar, fica definido que: </p>
+              <p>Os alunos com a escolaridade no turno da manhã, terão o turno complementar à tarde e
+              os alunos com a escolaridade no turno da Tarde, terão o turno complementar pela Manhã.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+            </div>
+          </div>
+      
+        </div>
+      </div>
+
     </div>
 
 
@@ -305,6 +336,14 @@
 
     <script>
         $("#aviso").modal();
+
+        $('#integral').change(function(){
+            if ($('#integral').is(':checked')) {            
+                $("#md_integral").modal();
+            }
+            
+        });
+
         $(function($){
             var SPMaskBehavior = function (val) {
                     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';

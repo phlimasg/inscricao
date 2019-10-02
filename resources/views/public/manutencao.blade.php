@@ -43,10 +43,10 @@
           
           
           <p>
-                Informamos que devido à grande demanda de inscrições ocorridas no primeiro processo de admissão de novos estudantes precisamos suspender temporariamente novos acessos para contabilizar as vagas remanescentes. 
+                Informamos que, devido à grande demanda de inscrições ocorridas no primeiro processo de admissão de novos alunos, estamos contabilizando as vagas remanescentes. 
           </p>
           <p>
-                Pedimos a gentileza de nos informar seu contato para que possamos retornar em breve.
+                Por favor, informe seu contato que retornaremos em breve.
           </p>
       </div>
       <div class="col-sm-4" style="background-color: #003c7f; padding: 10px;">
