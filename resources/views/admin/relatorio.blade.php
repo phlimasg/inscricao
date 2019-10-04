@@ -56,6 +56,7 @@
             chart.draw(data, options);
         }
     </script>
+    
     <div class="container-fluid title">
         <h1>Relatório das Inscrições {{date('Y')+1}}</h1>
     </div>
@@ -65,78 +66,83 @@
                 <div id="piechart" style="min-height: 300px;" class="img-fluid"></div>
             </div>
             <div class="col-sm-6">
-                    <div id="piechart2" style="min-height: 300px;" class="img-fluid"></div>
-                </div>
+                <div id="piechart2" style="min-height: 300px;" class="img-fluid"></div>
+            </div>
         </div>
 
 
     <div class="container-fluid" style="background-color: white; color: #003c7f; font-size: 12px">
         <div class="row" >
             <div class="col-sm-6">
-            <b>Inscrições pagas por dia:</b>
+                <b>Inscrições pagas por dia:</b>
 
-            <ul class="nav nav-tabs">
-                @foreach($dtprova as $d)
-                    <li class=""><a data-toggle="tab" href="#{{$d->id}}">{{date('d/m/Y',strtotime($d->DTPROVA))}}</a></li>
-                @endforeach
-            </ul>
-            <div class="tab-content">
-                @foreach($dtprova as $d)
-                    <div id="{{$d->id}}" class="tab-pane fade">
-                        @foreach($countDt as $x)
-                            @if($x->id == $d->id)
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    {{$x->ESCOLARIDADE}}
+                <ul class="nav nav-tabs">
+                    @foreach($dtprova as $d)
+                        <li class=""><a data-toggle="tab" href="#{{$d->id}}">{{date('d/m/Y',strtotime($d->DTPROVA))}}</a></li>
+                    @endforeach
+                </ul>
+                <div class="tab-content">
+                    @foreach($dtprova as $d)
+                        <div id="{{$d->id}}" class="tab-pane fade">
+                            @foreach($countDt as $x)
+                                @if($x->id == $d->id)
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        {{$x->ESCOLARIDADE}}
+                                    </div>
+                                    <div class="col-sm-2">
+                                        {{$x->QTD}}
+                                    </div>
                                 </div>
-                                <div class="col-sm-2">
-                                    {{$x->QTD}}
-                                </div>
-                            </div>
-                            @endif
-                        @endforeach
-                    </div>
-                @endforeach
-            </div>
-
-        </div>
-
-        <div class="col-sm-6">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Escolaridade</th>
-                        <th>Vagas Regular</th>
-                        <th>Vagas Integral</th>
-                        <th>Pagamentos efetuados</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($pg as $d)
-                        <tr>
-                            <td>{{$d->ANO}} - {{$d->ESCOLARIDADE}} - {{$d->TURNO}}</td>
-                            @if(($d->QTD_VAGAS - $d->QTD_INSCRITOS) < 4)
-                                <td style="color: darkred"><b>{{$d->QTD_VAGAS - $d->QTD_INSCRITOS}}</b></td>
-                            @else
-                                <td>{{$d->QTD_VAGAS - $d->QTD_INSCRITOS}}</td>
-                            @endif
-                            @foreach ($integral_insc as $i)
-                                @if ($d->ID == $i->esc_id)
-                        <td>{{$i->qtd_inscritos-$i->vagas}}</td>    
-                                @else
-                                    <td></td>
                                 @endif
                             @endforeach
-                            
-                            <td>{{$d->QTD_INSCRITOS}}</td>
-                        </tr>
+                        </div>
                     @endforeach
-                    </tbody>
-                </table>
+                </div>
             </div>
+
+            <div class="col-sm-6">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Escolaridade</th>
+                            <th>Vagas Regular</th>
+                            <th>Vagas Integral</th>
+                            <th>Pagamentos efetuados</th>
+                        </tr>
+                        </thead>
+                        <tbody>                     
+                            @foreach($pg as $d)
+                                <tr>
+                                    <td>{{$d->ANO}} - {{$d->TURNO}}</td>
+                                    @if(($d->QTD_VAGAS - $d->QTD_INSCRITOS) < 4)
+                                        <td style="color: darkred"><b>{{$d->QTD_VAGAS - $d->QTD_INSCRITOS}}</b></td>
+                                    @else
+                                        <td>{{$d->QTD_VAGAS - $d->QTD_INSCRITOS}}</td>
+                                    @endif
+                                    @php($td=0)
+                                    @foreach ($integral_insc as $i)  
+                                        @if ($d->ID == $i->esc_id)                                    
+                                            <td>{{$i->vagas-$i->qtd_inscritos}}</td> 
+                                            @php($td=1)                                                                     
+                                        @endif
+                                    @endforeach
+                                    @if ($td == 0)
+                                        <td></td>
+                                        
+                                    @endif                            
+                                    <td>{{$d->QTD_INSCRITOS}}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
-    </div>
+
+    
         </div>
         <br><br>
     </div>
