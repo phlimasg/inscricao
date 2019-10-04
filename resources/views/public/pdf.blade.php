@@ -11,7 +11,13 @@
     <table style="width: 100%">
         <tr>
             <td><img src="{{url('images/logo_pb.png')}}" alt="" width="150px"></td>
-            <td align="right"> <b>Inscrição nº:</b> {{$insc->NINSC}} <br>{{$insc->ESCOLARIDADE}}<br>{{$insc->ANO}}<br>TURNO {{$insc->TURNO}}<br>
+            <td align="right"> <b>Inscrição nº:</b> {{$insc->NINSC}} <br>{{$insc->ESCOLARIDADE}}<br>{{$insc->ANO}}<br>TURNO {{$insc->TURNO}}<br>                
+                @if (!empty($candidato_espera->INTEGRAL_ESPERA))
+                    ESPERA - 
+                @endif
+                @if (!empty($integral))
+                    COMPLEMENTAR<br>
+                @endif
                 Prova dia:  {{date('d/m/Y', strtotime($insc->DTPROVA))}}<br> as 8H</td>
         </tr>
     </table>

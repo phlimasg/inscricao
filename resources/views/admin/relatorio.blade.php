@@ -107,7 +107,8 @@
                     <thead>
                     <tr>
                         <th>Escolaridade</th>
-                        <th>vagas disponíveis</th>
+                        <th>Vagas Regular</th>
+                        <th>Vagas Integral</th>
                         <th>Pagamentos efetuados</th>
                     </tr>
                     </thead>
@@ -120,7 +121,14 @@
                             @else
                                 <td>{{$d->QTD_VAGAS - $d->QTD_INSCRITOS}}</td>
                             @endif
-
+                            @foreach ($integral_insc as $i)
+                                @if ($d->ID == $i->esc_id)
+                        <td>{{$i->qtd_inscritos-$i->vagas}}</td>    
+                                @else
+                                    <td></td>
+                                @endif
+                            @endforeach
+                            
                             <td>{{$d->QTD_INSCRITOS}}</td>
                         </tr>
                     @endforeach

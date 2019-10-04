@@ -24,29 +24,28 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                             <label for="ano">ano</label>
                             <select name="ano" id="ano" class="form-control">
                                 <option value=""></option>
                             </select>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-3">
                             <label for="turno">turno</label>
                             <select name="turno" id="turno" class="form-control">
                                 <option value=""></option>
                             </select>
                         </div>
+                        <div class="col-sm-3" id="div_integral" style="display: none">
+                                <label for="integral">complementar/Integral?</label>
+                                <select name="integral" id="integral" class="form-control">
+                                        <option value=""></option>                                    
+                                </select>
+                            </div>
                         
                         <div id="result"></div>
                     </div>
-                    <div class="row">
-                            <div class="col-sm-4">
-                                <label class="checkbox-inline">
-                                    <input type="checkbox" value="true" id="integral" >
-                                    COMPLEMENTAR/INTEGRAL?
-                                </label>
-                            </div>
-                    </div>
+                    
                     <div id="dadosDoAluno" style="display: none">
                    <div class="row">
                        <div class="col-sm-6">
@@ -337,13 +336,6 @@
     <script>
         $("#aviso").modal();
 
-        $('#integral').change(function(){
-            if ($('#integral').is(':checked')) {            
-                $("#md_integral").modal();
-            }
-            
-        });
-
         $(function($){
             var SPMaskBehavior = function (val) {
                     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
@@ -361,11 +353,18 @@
         $('#esc').change(function() {
             $("#loading").modal();
             var esc = $("#esc").val();
+            if(esc != 'ENSINO MÉDIO'){
+                $('#div_integral').show(500);
+            }
+            else{
+                $('#div_integral').hide(500);
+            }
             if(esc != ''){
                 $("#result").html('<div align="center"><img src="http://acesso.abel.org.br/images/load.gif" alt="" width="50"><br>Aguarde...</div>');
                 $.getJSON("{{url('/inscricao/candidato/')}}/"+ esc +"/ano", function(data) {
                     $('#ano').empty();
                     $('#turno').empty();
+                    $('#dadosDoAluno').hide(500);
                     $('#ano').append("<option value=''></option>");
                     $.each(data, function(index, element) {
                         $('#ano').append("<option value='"+ element.ANO +"'>" + element.ANO + "</option>");
@@ -376,6 +375,7 @@
             else{
                 $('#ano').empty();
                 $('#turno').empty();
+                $('#integral').empty();
                 $('#dadosDoAluno').hide(500);
             }
             $("#loading").modal('hide');
@@ -404,21 +404,44 @@
         });
 
         $('#turno').change(function () {
+            var esc = $("#esc").val();
+            if(esc == 'ENSINO MÉDIO'){
+                $('#dadosDoAluno').show(500);  
+            }
             $("#loading").modal();
             var id = $("#turno").val();
-            $('#divData').empty();
+            $('#divData').empty();            
+            $('#integral').empty();
+            $('#integral').append("<option value=''></option>");
+            $('#integral').append("<option value='1'>SIM</option>");
+            $('#integral').append("<option value='0'>NÃO</option>");
             if($('#turno').val() !=''){
                $.getJSON("{{url('/inscricao/candidato/idade')}}/"+ id , function(data) {
                    $.each(data, function(index, element) {
                        $("#divData").append('<label for="data">Data de Nascimento:</label><input type="date" required class="form-control" min="'+element.FX_ETARIA_INI+'"  max="'+element.FX_ETARIA_FIM+'" name="data">');
                    });
                });
-               $('#dadosDoAluno').show(500);
+               
 
            }
            else
                $('#dadosDoAluno').hide(500);
             $("#loading").modal('hide');
+        });
+
+        $('#integral').change(function(){
+            if ($('#integral').val() =='1') {            
+                $("#md_integral").modal();
+                $('#dadosDoAluno').show(500);
+            }else{
+                if($('#integral').val() =='0'){
+                    $('#dadosDoAluno').show(500);                    
+                }
+                else{
+                    $('#dadosDoAluno').hide(500);
+                }
+            }            
+            
         });
 
         $("#cep").blur(function() {

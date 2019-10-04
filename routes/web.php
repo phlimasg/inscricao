@@ -12,7 +12,7 @@
 |
 */
 Route::get('/', function () {
-    return view('public.manutencao');
+    return view('public.login');
 });
 
 Route::post('/validaCpf', 'respFinController@validaCpf')->name('validaCpf');

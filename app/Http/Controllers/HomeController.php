@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Model\avaliacao;
+use App\Model\escolaridade;
 use App\Model\inscricao;
 use App\Model\inscricaoQtdDataView;
 use App\Model\inscricaoQtdView;
 use App\Model\inscricaoView;
+use App\Model\integral;
+use App\Model\integral_insc;
 use Illuminate\Http\Request;
 use App\Model\matricula;
 
@@ -29,7 +32,31 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $integral = integral::count();        
+        if($integral == 0){
+            $esc = escolaridade::all();
+            foreach($esc as $e){ 
+                if($e->ESCOLARIDADE != 'ENSINO MÉDIO')               
+                    if($e->TURNO == "MANHÃ"){
+                        $integral = new integral();
+                        $integral->turno = "TARDE";
+                        $integral->vagas = 25;
+                        $integral->esc_id = $e->ID;
+                        $integral->save(); 
+                    }
+                    elseif($e->TURNO == "TARDE"){
+                        $integral = new integral();
+                        $integral->turno = "MANHÃ";
+                        $integral->vagas = 25;
+                        $integral->esc_id = $e->ID;
+                        $integral->save(); 
+                    }
+                
+            }
+        }
+        
         $pg = new inscricaoQtdView();
+        $integral_insc = integral_insc::all();
         $qtdPg = inscricao::where('PAGAMENTO','1')
             ->count();
         $pg = $pg::orderBy('ID')->get();
@@ -49,8 +76,8 @@ class HomeController extends Controller
         $countDt = inscricaoQtdDataView::get();
 
         $countMat = matricula::count();        
-
-        return view('admin.relatorio', compact(['qtdPg','pg','insc','inscCount','countDt','dtprova', 'countMat']));
+//dd($pg, $integral_insc);
+        return view('admin.relatorio', compact(['qtdPg','pg','insc','inscCount','countDt','dtprova', 'countMat','integral_insc']));
     }
     public function searchIndex(){
         return view('admin.search');

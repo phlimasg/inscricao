@@ -9,6 +9,13 @@
         <div class="container-fluid form">
             <div class="container ">
                    @csrf
+                   @if (!empty($integral_espera) && $integral_espera == 1)
+                   <div class="alert alert-danger">
+                      <strong>Aviso!</strong> <br>
+                      por falta de vagas para o turno complementar, o candidato foi inserido automaticamente na lista de espera.<br>
+                      A inscrição para o turno regular poderá ser executada normalmente.
+                    </div>
+                   @endif
                    <div class="row">
                        <div class="col-sm-3">
                            <label for="">Selecione o dia da Avaliação:</label>

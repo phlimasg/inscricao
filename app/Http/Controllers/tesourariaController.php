@@ -9,6 +9,8 @@ use App\Model\escolaridade;
 use App\Model\inscricao;
 use App\Model\inscricaoQtdView;
 use App\Model\inscricaoView;
+use App\Model\integral;
+use App\Model\integral_insc;
 use App\Model\respFin;
 use Illuminate\Support\Facades\Auth;
 use Mpdf\Mpdf;
@@ -57,11 +59,25 @@ class tesourariaController extends Controller
         $vagas = inscricaoQtdView::selectRaw('SUM(QTD_VAGAS - QTD_INSCRITOS) AS VAGAS')
             ->where('ID',$id_esc->ID_ESC)
             ->first();
-
-        $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $id_esc->ID_ESC)->first();   
+        $candidato_espera = inscricao::where('inscricaos.ID',$insc)
+        ->join('candidatos','CANDIDATO_ID','candidatos.ID')
+        ->select('INTEGRAL_ESPERA')
+        ->first();
+        //dd($candidato_espera);
+        $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $id_esc->ID_ESC)->first();  
+        $integral = integral::where('esc_id', $id_esc->ID_ESC)->first(); 
+        $integral_insc = integral_insc::where('esc_id',$id_esc->ID_ESC)->first();
+        if(!empty($integral_insc) && $integral_insc->qtd_inscritos != null){
+            $insc_integral = $integral_insc->vagas - $integral_insc->qtd_inscritos;
+            if($insc_integral<0)
+                $insc_integral = 0;
+        }else{
+            $insc_integral = 0;
+        }
         //dd($esc_vag,$id_esc)     ;
+        //dd($vagas->VAGAS-$insc_integral);
         if($esc_vag->QTD_VAGAS > 0){
-            if($vagas->VAGAS == null || $vagas->VAGAS > 0){
+            if($vagas->VAGAS == null || ($vagas->VAGAS-$insc_integral) > 0){
                 $pg = inscricao::where('id',$insc)
                     ->first();
                 $pg->PAGAMENTO = 1;
@@ -74,7 +90,7 @@ class tesourariaController extends Controller
                 $mpdf->WriteHTML(view('admin.pdfpagamento',compact('insc')));
                 $mpdf->AddPage();
                 $mpdf->WriteHTML('<div align="center">VIA DA SECRETARIA</div>');
-                $mpdf->WriteHTML(view('public.pdf',compact('insc')));
+                $mpdf->WriteHTML(view('public.pdf',compact('insc','integral','candidato_espera')));
                 return $mpdf->Output();
             }
             else{
