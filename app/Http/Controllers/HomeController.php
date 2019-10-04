@@ -59,7 +59,7 @@ class HomeController extends Controller
         $integral_insc = integral_insc::all();
         $qtdPg = inscricao::where('PAGAMENTO','1')
             ->count();
-        $pg = inscricaoQtdView::orderBy('ESCOLARIDADE')->orderBy('ANO')->get();
+        $pg = inscricaoQtdView::orderBy('ESCOLARIDADE')->orderBy('ANO')->orderBy('TURNO')->get();
         //dd($pg);
         //$insc = inscricaoView::where('PAGAMENTO_DATA','!=','0000-00-00')->groupBy('id');
         $inscCount = inscricao::whereNotIn('id',inscricao::select('id')->where('PAGAMENTO_DATA','=','0000-00-00')->get())
