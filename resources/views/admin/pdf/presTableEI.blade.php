@@ -1,6 +1,6 @@
    @foreach($q as $a)
     <tr>
-        <td>{{strtoupper($a->CNOME)}}</td>
+        <td>{{strtoupper($a->CNOME)}} - {{strtoupper($a->TURNO)}}@if ($a->INTEGRAL_ID != null) | COMPLEMENTAR @endif</td>
         <td></td>
         <td></td>
         <td></td>

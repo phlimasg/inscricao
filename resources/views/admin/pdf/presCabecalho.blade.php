@@ -14,7 +14,6 @@
 <div align="center">
 <h3>Ingresso {{date('Y')+1}} - {{$esc->ANO}} | {{$esc->ESCOLARIDADE}}</h3>
 </div>
-Data da Avaliação: VAR <br>
 
 <table width="100%">
     <tr>

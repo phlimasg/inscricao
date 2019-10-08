@@ -37,7 +37,8 @@ class secretariaController extends Controller
             ->get();
         $mpdf = new Mpdf(['orientation' => 'L']);
         foreach ($e as $esc){
-            $q = inscricaoView::select('CNOME','ANO','TURNO','ESCOLARIDADE')
+            $q = inscricaoView::select('CNOME','ANO','TURNO','ESCOLARIDADE','INTEGRAL_ID')
+                ->join('candidatos','inscricaoview.id','candidatos.id')
                 ->where('ID_AVAL',$id)
                 ->where('PAGAMENTO',1)
                 ->where('ANO',$esc->ANO)
