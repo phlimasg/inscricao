@@ -63,7 +63,7 @@ class tesourariaController extends Controller
         ->join('candidatos','CANDIDATO_ID','candidatos.ID')
         ->select('INTEGRAL_ESPERA')
         ->first();
-        //dd($candidato_espera);
+        
         $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $id_esc->ID_ESC)->first();  
         $integral = integral::where('esc_id', $id_esc->ID_ESC)->first(); 
         $integral_insc = integral_insc::where('esc_id',$id_esc->ID_ESC)->first();
@@ -74,8 +74,9 @@ class tesourariaController extends Controller
         }else{
             $insc_integral = 0;
         }
-        //dd($esc_vag,$id_esc)     ;
-        //dd($vagas->VAGAS-$insc_integral);
+        if($vagas->VAGAS<$insc_integral){
+            $insc_integral = $vagas->VAGAS-1;
+        }
         if($esc_vag->QTD_VAGAS > 0){
             if($vagas->VAGAS == null || ($vagas->VAGAS-$insc_integral) > 0){
                 $pg = inscricao::where('id',$insc)
