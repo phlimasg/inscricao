@@ -170,10 +170,10 @@ class candidatoController extends Controller
             ->first();            
         $candidato_espera = inscricao::where('inscricaos.ID', $insc->NINSC)
             ->join('candidatos', 'CANDIDATO_ID', 'candidatos.ID')
-            ->select('INTEGRAL_ESPERA')
+            ->select('INTEGRAL_ESPERA','INTEGRAL_ID')
             ->first();
             //dd($candidato_espera);
-        $integral = integral::where('esc_id', $insc->ID_ESC)->first();
+        //$integral = integral::where('esc_id', $insc->ID_ESC)->first();
         //dd($integral,$candidato_espera);
         $mpdf->WriteHTML(view('public.pdf', compact('insc', 'integral','candidato_espera')));
         return $mpdf->Output();

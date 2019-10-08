@@ -14,8 +14,8 @@
             <td align="right"> <b>Inscrição nº:</b> {{$insc->NINSC}} <br>{{$insc->ESCOLARIDADE}}<br>{{$insc->ANO}}<br>TURNO {{$insc->TURNO}}<br>                
                 @if (!empty($candidato_espera->INTEGRAL_ESPERA))
                     ESPERA - 
-                @endif
-                @if (!empty($integral))
+                @endif                
+                @if (!empty($candidato_espera->INTEGRAL_ID))
                     COMPLEMENTAR<br>
                 @endif
                 Prova dia:  {{date('d/m/Y', strtotime($insc->DTPROVA))}}<br> as 8H</td>
