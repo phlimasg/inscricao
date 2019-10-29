@@ -10,7 +10,7 @@
               <th>Escolaridade</th>
               <th>Ano</th>
               <th>Turno</th>
-              <th></th>
+              <th>Dt. Prova</th>
               <th></th>
             </tr>
           </thead>
@@ -22,7 +22,8 @@
                 <td>{{$i->ESCOLARIDADE}}</td>
                 <td>{{$i->ANO}}</td>
                 <td>{{$i->TURNO}}</td>
-                <td>                    
+                <td>    
+                        {{date('d/m/Y', strtotime($i->DTPROVA))}}                
                     <!--<a href="/inscricao/candidato/prova/{{$i->CPF}}/{{$i->id}}" target="_blank"><i class="glyphicon glyphicon-calendar"></i></a>-->
                 </td>
             <td>
