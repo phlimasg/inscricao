@@ -1,6 +1,15 @@
 @extends('layouts.admin_central')
 @section('content')
-<h3>Candidatos pagos e não matriculados - Total de {{$total}} candidatos</h3>
+<div class="row">
+    <div class="col-sm-6">
+        <h3>Candidatos pagos e não matriculados</h3>
+    </div>
+    <div class="col-sm-6">
+            {{ $naoMat->links() }}
+    </div>
+</div>
+
+
         <div class="table-responsive">          
         <table class="table">
           <thead>

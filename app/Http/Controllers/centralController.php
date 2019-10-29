@@ -130,14 +130,11 @@ class centralController extends Controller
         ->where('PAGAMENTO',1)
         ->where('DTPROVA','<',date('Y-m-d'))
         ->groupBy('NINSC')
-        ->paginate(15);
-        $total =  inscricaoView::whereNotIn('NINSC',
-            matricula::select('inscricao_id')->get()
-            )
-        ->where('PAGAMENTO',1)
-        ->where('DTPROVA','<',date('Y-m-d'))
-        ->groupBy('NINSC')
-        ->count();
+        ->orderBy('ESCOLARIDADE')
+        ->orderBy('ANO')
+        ->orderBy('TURNO')
+        ->orderBy('CNOME')
+        ->paginate(15);        
         //dd($naoMat,date('Y-m-d'));
         return view('admin.central_pg_n_mat',compact('naoMat','total'));
     }
