@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Model\candidato;
 use App\Model\filiacao;
+use App\Model\historico;
 use App\Model\inscricao;
+use App\Model\inscricaoView;
+use App\Model\matricula;
 use Illuminate\Http\Request;
 
 class centralController extends Controller
@@ -111,6 +114,35 @@ class centralController extends Controller
         $insc = inscricao::find($id);
         $insc->PAGAMENTO_DATA = '0000-00-00';
         $insc->save();
+        return redirect()->back();
+    }
+    public function pagNaoMatriculado()
+    {
+        $naoMat =  inscricaoView::whereNotIn('NINSC',
+            matricula::select('inscricao_id')->get()
+            )
+        ->where('PAGAMENTO',1)
+        ->where('DTPROVA','<',date('Y-m-d'))
+        ->groupBy('NINSC')
+        ->paginate(15);
+        $total =  inscricaoView::whereNotIn('NINSC',
+            matricula::select('inscricao_id')->get()
+            )
+        ->where('PAGAMENTO',1)
+        ->where('DTPROVA','<',date('Y-m-d'))
+        ->groupBy('NINSC')
+        ->count();
+        //dd($naoMat,date('Y-m-d'));
+        return view('admin.central_pg_n_mat',compact('naoMat','total'));
+    }
+
+    public function addHistorico(Request $request)
+    {
+        //dd($request->all());
+        $historico = new historico();
+        $historico->id_cand_insc = $request->id;
+        $historico->observacao = $request->observacao;
+        $historico->save();
         return redirect()->back();
     }
 }

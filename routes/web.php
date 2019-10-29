@@ -59,6 +59,8 @@ Route::group(['prefix'=>'/home'], function (){
     Route::get('secretaria/etiqueta-kit/{id}','secretariaController@etiquetaKit')->name('etiqueta-kit');
     //Central
     Route::get('central','centralController@index');
+    Route::get('central/nao_matriculados','centralController@pagNaoMatriculado');
+    Route::post('central/add_historico','centralController@addHistorico')->name('add_historico');
     Route::get('central/espera','centralController@espera');
     Route::get('central/espera/{id}','centralController@esperaRemove');
     Route::get('central/pagamento','centralController@naoPagos');
