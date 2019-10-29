@@ -17,6 +17,7 @@ class CreateHistoricosTable extends Migration
             $table->increments('id');
             $table->unsignedBigInteger('id_cand_insc');
             $table->text('observacao');
+            $table->string('user');
             $table->timestamps();
         });
     }

@@ -72,7 +72,7 @@ Route::group(['prefix'=>'/home'], function (){
     Route::post('central/emailInteresse','emailController@cad_interesse_send');
     Route::get('config','configController@index');
 });
-Route::get('/login','Auth\googleController@redirectToProvider');
+Route::get('/login','Auth\googleController@redirectToProvider')->name('login');
 Route::get('/login/google/callback','Auth\googleController@handleProviderCallback');
 Route::get('/logoff','Auth\googleController@logoff');
 Route::get('/home','HomeController@index')->name('home');

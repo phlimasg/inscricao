@@ -9,9 +9,14 @@ use App\Model\inscricao;
 use App\Model\inscricaoView;
 use App\Model\matricula;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class centralController extends Controller
 {    
+    public function __construct()
+    {
+        $this->middleware('auth');         
+    }
     public function index(){
         return redirect('/home/procurar');
     }
@@ -118,6 +123,7 @@ class centralController extends Controller
     }
     public function pagNaoMatriculado()
     {
+        
         $naoMat =  inscricaoView::whereNotIn('NINSC',
             matricula::select('inscricao_id')->get()
             )
@@ -142,6 +148,7 @@ class centralController extends Controller
         $historico = new historico();
         $historico->id_cand_insc = $request->id;
         $historico->observacao = $request->observacao;
+        $historico->user = Auth::user()->email;
         $historico->save();
         return redirect()->back();
     }

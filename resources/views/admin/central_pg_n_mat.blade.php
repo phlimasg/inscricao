@@ -112,12 +112,17 @@
                             @foreach ($i->historico as $h)
                             <div class="alert alert-info">
                                 <div class="row">
-                                    <div class="col-sm-2">
-                                        {{date('d/m/Y h:i',strtotime($h->created_at))}}
-                                    </div>
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-12">
                                         {{$h->observacao}}
-                                    </div>
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-3">
+                                                Data: {{date('d/m/Y h:i',strtotime($h->created_at))}}
+                                            </div>
+                                            <div class="col-sm-7">
+                                                    Usuário: {{$h->user}}
+                                            </div>
                                 </div>
                             </div>
                             @endforeach
