@@ -67,6 +67,7 @@ class tesourariaController extends Controller
         $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $id_esc->ID_ESC)->first();  
         $integral = integral::where('esc_id', $id_esc->ID_ESC)->first(); 
         $integral_insc = integral_insc::where('esc_id',$id_esc->ID_ESC)->first();
+       
         if(!empty($integral_insc) && $integral_insc->qtd_inscritos != null){
             $insc_integral = $integral_insc->vagas - $integral_insc->qtd_inscritos;
             if($insc_integral<0)
@@ -78,21 +79,23 @@ class tesourariaController extends Controller
             $insc_integral = $vagas->VAGAS-1;
         }
         if($esc_vag->QTD_VAGAS > 0){
-            if($vagas->VAGAS == null || ($vagas->VAGAS-$insc_integral) > 0){
-                $pg = inscricao::where('id',$insc)
-                    ->first();
-                $pg->PAGAMENTO = 1;
-                $pg->PAGAMENTO_DATA = date('Y-m-d');
-                $pg->save();
-                $mpdf = new Mpdf();
-                $insc = inscricaoView::where('NINSC',$insc)
-                    ->groupBy('NINSC')
-                    ->first();
-                $mpdf->WriteHTML(view('admin.pdfpagamento',compact('insc')));
-                $mpdf->AddPage();
-                $mpdf->WriteHTML('<div align="center">VIA DA SECRETARIA</div>');
-                $mpdf->WriteHTML(view('public.pdf',compact('insc','integral','candidato_espera')));
-                return $mpdf->Output();
+            if($vagas->VAGAS>0){
+                if($vagas->VAGAS == null || ($vagas->VAGAS-$insc_integral) > 0){
+                    $pg = inscricao::where('id',$insc)
+                        ->first();
+                    $pg->PAGAMENTO = 1;
+                    $pg->PAGAMENTO_DATA = date('Y-m-d');
+                    $pg->save();
+                    $mpdf = new Mpdf();
+                    $insc = inscricaoView::where('NINSC',$insc)
+                        ->groupBy('NINSC')
+                        ->first();
+                    $mpdf->WriteHTML(view('admin.pdfpagamento',compact('insc')));
+                    $mpdf->AddPage();
+                    $mpdf->WriteHTML('<div align="center">VIA DA SECRETARIA</div>');
+                    $mpdf->WriteHTML(view('public.pdf',compact('insc','integral','candidato_espera')));
+                    return $mpdf->Output();
+                }
             }
             else{
                 $cand = inscricao::where('id',$insc)->first();
