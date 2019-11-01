@@ -24,8 +24,10 @@
             </tr>
           </thead>
           <tbody>
-              @forelse ($naoMat as $i)
-              <tr>
+              @forelse ($naoMat as $i)              
+              <tr @if (!empty($i->historico[0]->observacao))
+                style="background-color: lightgrey"
+              @endif>
               <td>{{$i->NINSC}}</td>
                 <td><a href="#" data-toggle="modal" data-target="#{{$i->id}}">{{strtoupper($i->CNOME)}}</a></td>
                 <td>{{$i->ESCOLARIDADE}}</td>
