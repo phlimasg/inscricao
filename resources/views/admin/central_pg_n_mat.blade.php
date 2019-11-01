@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="row">
                                         <div class="col-sm-3">
-                                                Data: {{date('d/m/Y h:i',strtotime($h->created_at))}}
+                                                Data: {{date('d/m/Y H:i',strtotime($h->created_at))}}
                                             </div>
                                             <div class="col-sm-7">
                                                     Usuário: {{$h->user}}
