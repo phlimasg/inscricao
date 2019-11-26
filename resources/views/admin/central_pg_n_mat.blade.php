@@ -110,6 +110,7 @@
                                 <hr>
                                 <div class="row">  
                                 <input type="hidden" name="id" value="{{$i->NINSC}}">                                  
+                                <input type="hidden" name="tabela" value="Pagos - Não matriculados">
                                     <div class="col-sm-10">
                                         <label for="">Adicionar observação:</label>
                                         <textarea cols="30" rows="3" class="form-control" name="observacao"></textarea>
@@ -121,7 +122,7 @@
                                 </div>
                             </form>
                             <h3>Observação:</h3>
-                            @foreach ($i->historico as $h)
+                            @foreach ($i->historico->where('tabela','Pagos - Não matriculados') as $h)
                             <div class="alert alert-info">
                                 <div class="row">
                                     <div class="col-sm-12">

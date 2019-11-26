@@ -144,6 +144,7 @@ class centralController extends Controller
         //dd($request->all());
         $historico = new historico();
         $historico->id_cand_insc = $request->id;
+        $historico->tabela = $request->tabela;
         $historico->observacao = $request->observacao;
         $historico->user = Auth::user()->email;
         $historico->save();

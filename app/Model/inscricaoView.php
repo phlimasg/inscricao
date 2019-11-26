@@ -10,6 +10,6 @@ class inscricaoView extends Model
 
     public function historico()
     {
-        return $this->hasMany(historico::class, 'id_cand_insc','NINSC');
+        return $this->hasMany(historico::class, 'id_cand_insc','NINSC')->orderBy('created_at','desc');
     }
 }

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class avaliacao extends Model
 {
-    public $timestamps = false;
+    public $timestamps = false;    
 }
