@@ -59,9 +59,10 @@ class centralController extends Controller
     }
     public function esperaRemove($id)
     {
-        inscricao::where('CANDIDATO_ID',$id)->delete();
-        filiacao::where('CANDIDATO_ID',$id)->delete();
-        candidato::where('id',$id)->delete();
+        //inscricao::where('CANDIDATO_ID',$id)->delete();
+        //filiacao::where('CANDIDATO_ID',$id)->delete();
+        //candidato::where('id',$id)->delete();
+        candidato::where('id',$id)->update(['espera'=> 2]);
         return redirect()->back();
     }
 
