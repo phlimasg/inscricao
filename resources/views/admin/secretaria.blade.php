@@ -19,6 +19,7 @@
                         <td><a target="_blank" href="{{route('lstPresenca',['id'=> $a->id])}}" data-toggle="tooltip" data-placement="right" title="Lista de Presença"><span class="glyphicon glyphicon-user text-danger"></span> Gerar lista de presença</a></td>
                         <td><a href="{{route('etiqueta',['id' => $a->id])}}"  data-toggle="tooltip" data-placement="left" title="Gerar Etiquetas"><span class="glyphicon glyphicon-barcode text-success"></span> Gerar Etiquetas</a></td>
                         <td><a href="{{route('etiqueta-kit',['id' => $a->id])}}"  data-toggle="tooltip" data-placement="left" title="Gerar Etiquetas"><span class="glyphicon glyphicon-barcode text-danger"></span> Etiquetas para kit</a></td>
+                        <td><a href="{{route('etiqueta-pulseira',['id' => $a->id])}}"  data-toggle="tooltip" data-placement="left" title="Gerar Pulseira"><span class="glyphicon glyphicon-barcode text-primary"></span> Etiquetas para Pulseira</a></td>
                     </tr>
                 @endforeach
                 </tbody>

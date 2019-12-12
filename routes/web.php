@@ -57,6 +57,7 @@ Route::group(['prefix'=>'/home'], function (){
     Route::get('secretaria/presenca/{id}','secretariaController@lstPresenca')->name('lstPresenca');
     Route::get('secretaria/etiqueta/{id}','secretariaController@etiqueta')->name('etiqueta');
     Route::get('secretaria/etiqueta-kit/{id}','secretariaController@etiquetaKit')->name('etiqueta-kit');
+    Route::get('secretaria/etiqueta-pulseira/{id}','secretariaController@etiquetaPulseira')->name('etiqueta-pulseira');
     //Central
     Route::get('central','centralController@index');
     Route::get('central/nao_matriculados','centralController@pagNaoMatriculado');

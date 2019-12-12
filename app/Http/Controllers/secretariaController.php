@@ -211,4 +211,41 @@ class secretariaController extends Controller
         //$mpdf->WriteHTML(view('admin.pdf.etiqueta',compact('q')));
         return $mpdf->Output();
     }
+    public function etiquetaPulseira($id){
+        $html = '<style>body{font-family: Tahoma;text-transform: uppercase; }table {border-collapse: collapse;}
+        tr {
+            border-collapse: collapse;
+            border: 1px solid white;
+        }
+        </style>
+            <table width="100%">';
+        $fim = '</table>';
+
+        $q = inscricaoView::where('ID_AVAL',$id)
+            ->where('PAGAMENTO',1)
+            ->orderby('CNOME')
+            ->groupBy('NINSC')
+            //->limit(5)
+            ->get();
+
+        $mpdf = new Mpdf();
+
+        //$mpdf->WriteHTML($cabecalho);
+        $count = 0;
+
+        foreach ($q as $a){
+            if($count == 0) {                
+                $html.='<tr>';
+            }
+            $count++;            
+            $html.= view('admin.pdf.etiquetaPulseira', compact('a'));
+            if($count == 5){
+                $count = 0;                
+                $html.='</tr>';
+            }
+        }
+        $html .= $fim;
+        $mpdf->WriteHTML($html);
+        return $mpdf->Output();
+    }
 }
