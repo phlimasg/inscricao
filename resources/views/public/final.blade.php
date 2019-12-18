@@ -10,8 +10,8 @@
                    Prezado(a) {{$c->FINNOME}}, <br><br>
                    Confirmamos os dados para a inscrição do aluno(a) {{$c->CNOME}}.<br>
                    <div style="color: #003c7f; background: white; padding: 15px">
-
-                       Lembramos que o pagamento da taxa no valor de <b>R$50,00</b> para a Avaliação Diagnóstica é condição para efetivar a inscrição.
+                        <b>A avaliação diagnóstica será agendada na Secretaria, após o pagamento da taxa de inscrição".</b> <br>
+                        Vale ressaltar que a reserva de vaga está condicionada ao pagamento da taxa de <b>R$50,00,</b> na Tesouraria do colégio.
                        <br>
                        A Avaliação ocorrerá no dia @if($c->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($c->DTPROVA))}} AS 9H @endif.
                        O pagamento deve ser feito na Tesouraria do Colégio. <br>
