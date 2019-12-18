@@ -26,7 +26,7 @@
                     <td>{{$i->NINSC}}</td>
                     <td>{{$i->CNOME}}</td>
                     <td><a href="{{url('inscricao/concluido/'.$i->id)}}" style="color: #f5c6cb"> Informações</a></td>
-                    <td>{{date('d/m/Y', strtotime($i->DTPROVA))}} AS 8H</td>
+                    <td> @if($i->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($i->DTPROVA))}} AS 9H. @endif</td>
                     <td><a href="{{url('inscricao/candidato/infos/'.$i->CPF.'/'.$i->NINSC)}}" TARGET="_blank"><span class="fa fa-file-pdf-o" style="color:red"></span></a></td>
                     @if($i->PAGAMENTO == 0)
                         <td>não efetuado</td>

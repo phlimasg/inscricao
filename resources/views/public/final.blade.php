@@ -13,7 +13,7 @@
 
                        Lembramos que o pagamento da taxa no valor de <b>R$50,00</b> para a Avaliação Diagnóstica é condição para efetivar a inscrição.
                        <br>
-                       A Avaliação ocorrerá no dia <b>{{date('d/m/Y', strtotime($c->DTPROVA))}}</b>, às <b>08:00</b> horas.
+                       A Avaliação ocorrerá no dia @if($c->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($c->DTPROVA))}} AS 9H @endif.
                        O pagamento deve ser feito na Tesouraria do Colégio. <br>
                        <b>As vagas são limitadas.</b>
                        <br>

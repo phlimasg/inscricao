@@ -22,7 +22,7 @@
                            <select name="avaliacao_id" id="" class="form-control" required>
                                <option value=""></option>
                                @foreach($a as $dia)
-                               <option value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS 8H</option>
+                               <option value="{{$dia->id}}">@if($dia->DTPROVA=="2020-06-07")Agendar na secretaria @else{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS 9H @endif</option>
                                @endforeach
                            </select>
                        </div>
