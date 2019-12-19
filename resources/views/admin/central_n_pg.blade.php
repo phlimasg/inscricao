@@ -16,7 +16,9 @@
           </thead>
           <tbody>
               @forelse ($naoPagos as $i)
-              <tr>
+              <tr @if (!empty($i->historico[0]->observacao))
+                style="background-color: lightgrey"
+              @endif>
               <td>{{$i->id}}</td>
                 <td><a href="#" data-toggle="modal" data-target="#{{$i->id}}">{{strtoupper($i->NOME)}}</a></td>
                 <td>{{$i->ESCOLARIDADE}}</td>
@@ -93,7 +95,42 @@
                                         <label for="">Tel.:</label> {{$i->finTel}}
                                     </div>
                             </div>
-                        <iframe src="{{ url('painel/'.$i->CPF) }}" frameborder="0" width="100%" style="min-height: 550px;"></iframe>
+                            <form action="{{ route('add_historico') }}" method="post">
+                                @csrf
+                                <hr>
+                                <div class="row">  
+                                <input type="hidden" name="id" value="{{$i->id}}">                                   
+                                <input type="hidden" name="tabela" value="Nao pagos">
+                                    <div class="col-sm-10">
+                                        <label for="">Adicionar observação:</label>
+                                        <textarea cols="30" rows="3" class="form-control" name="observacao"></textarea>
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <br>
+                                        <button class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> Adicionar</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <h3>Observação:</h3>
+                            @foreach ($i->historico->where('tabela','Nao pagos') as $h)
+                            <div class="alert alert-info">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {{$h->observacao}}
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-3">
+                                                Data: {{date('d/m/Y H:i',strtotime($h->created_at))}}
+                                            </div>
+                                            <div class="col-sm-7">
+                                                    Usuário: {{$h->user}}
+                                            </div>
+                                </div>
+                            </div>
+                            <br>
+                            @endforeach
+                        <iframe src="{{ url('painel/'.$i->CPF) }}" frameborder="0" width="100%" style="min-height: 350px;"></iframe>
                                 
 
                             </div>
