@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\avaliacao;
 use App\Model\candidato;
+use App\Model\documentos;
 use App\Model\escolaridade;
 use App\Model\filiacao;
 use App\Model\inscricao;
@@ -13,6 +14,7 @@ use App\Model\integral;
 use App\Model\integral_insc;
 use Illuminate\Http\Request;
 use Mpdf\Mpdf;
+use Illuminate\Support\Str;
 
 class candidatoController extends Controller
 {
@@ -46,7 +48,40 @@ class candidatoController extends Controller
     }
     public function save(Request $request, $cpf)
     {
-        //dd($request->all());
+        $request->validate([
+            /*'nome' => 'string|required|max:254',
+            'data' => 'required|date|after_or_equal:1910-01-01',
+            'nat_cidade'=> 'string|required|max:254',
+            'rua'=> 'string|required|max:254',
+            'bairro'=> 'string|required|max:254',
+            'cidade'=> 'string|required|max:254',
+            'estado'=> 'string|required|max:254',
+            'cep'=> 'string|required|max:254',
+            'tel' => 'required',            
+            'cidade' => 'string|required|max:25',
+            'estado' => 'required',
+            'turno'=> 'required',
+            'nomef1'=> 'string|required|max:254',
+            'nomef2'=> 'string|required|max:254',
+            'dataf1'=> 'required|date|after_or_equal:1910-01-01',
+            'dataf2'=> 'required|date|after_or_equal:1910-01-01',
+            'cidadef1'=> 'string|required|max:254',
+            'cidadef2'=> 'string|required|max:254',
+            'estadof1'=> 'string|required|max:254',
+            'estadof2'=> 'string|required|max:254',*/
+            'documento.*' => 'required|file|mimes:jpeg,jpg,pdf,PDF|max:20000',
+            'documento_opcional.*' => 'file|mimes:jpeg,jpg,pdf,PDF|max:20000',//20MB
+        ],
+        [
+            'required' => 'Campo Obrigatório',
+            'required_if' => 'Campo Obrigatório',
+            'digits_between' => 'Min. de :min e max. :max digitos',
+            'min' => 'Mínimo de :min de caracteres',
+            'max' => 'Limite de :max caracteres',
+            'numeric' => 'Somente números',
+            'mimes' => 'O documento deve ser formato:jpeg,jpg,pdf',
+        ]);
+        //dd($request->documento);
         $c = new candidato();
         $c->NOME = $request->nome;
         $c->DTNASC = $request->data;
@@ -69,8 +104,10 @@ class candidatoController extends Controller
                 $c->INTEGRAL_ID = $id->id;
         }
         $c->RESPFIN_CPF = $cpf;
+        //dd($request->all());
         $c->save();
-
+        $this->fileUpload($request->documento, $c->id);
+        $request->documento_opcional ? $this->fileUpload($request->documento_opcional, $c->id):'';
         $f = new filiacao();
         $f->CANDIDATO_ID = $c->id;
         $f->NOME_1 = $request->nomef1;
@@ -177,5 +214,31 @@ class candidatoController extends Controller
         //dd($integral,$candidato_espera);
         $mpdf->WriteHTML(view('public.pdf', compact('insc', 'integral','candidato_espera')));
         return $mpdf->Output();
+    }
+    public function fileUpload($upload,$id)
+    {
+        //dd($upload);
+        
+        $count=1;
+        foreach ($upload as $i){
+            $doc = new documentos();
+            $namefile = rand(9999).'_'.date('d-m-Y_H-m-s').'_'.Str::kebab($i->getClientOriginalName());
+            $up = $i->storeAs('/'.'/public/upload/documentos/'.$id,$namefile);
+            //dd(storage_path(),$up);
+            //chmod(storage_path('/app/public/upload/documentos/'),0777);
+            //chmod(storage_path('/app/public/upload/documentos/'.$id),0777);
+            //chmod(storage_path('app/public/'.$up),0777);
+            $doc->nome = $namefile;
+            $doc->url = $up;
+            $doc->candidato_id = $id;
+            $doc->save();
+            //dd($up,$namefile,$doc);
+            if (!$up )
+                return redirect()
+                    ->back()
+                    ->with('error', 'Falha ao fazer upload')
+                    ->withInput();
+            $count++;
+        }
     }
 }

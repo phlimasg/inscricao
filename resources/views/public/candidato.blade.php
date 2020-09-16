@@ -3,7 +3,7 @@
     <div class="container-fluid title">
         <h1>Dados do Candidato - Aluno(a)</h1>
     </div>
-    <form action="{{url('inscricao/candidato/save/'.$cpf)}}" method="post">
+    <form action="{{url('inscricao/candidato/save/'.$cpf)}}" method="post" enctype="multipart/form-data">
         <div class="container-fluid form">
             <div class="container ">
                 @if($errors->all())
@@ -148,6 +148,25 @@
                             </select>
                         </div>
                     </div>
+                    <h2>Anexo de Comprovantes</h2>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="">Boletim primeiro semestre de 2020</label>
+                            <input type="file" name="documento[]" id="" class="form-control" required multiple accept="image/jpg, image/jpeg, application/pdf">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="">Certidão de Nascimento</label>
+                            <input type="file" name="documento[]" id="" class="form-control" required multiple accept="image/jpg, image/jpeg, application/pdf">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="">Comprovante de escolaridade(Somente para EI)</label>
+                            <input type="file" name="documento_opcional[]" id="" class="form-control" multiple accept="image/jpg, image/jpeg, application/pdf">
+                        </div>
+                    </div>                    
                         <div class="row form">
                             <div class="col-sm-12">
                                 <label>O Candidato é ex-aluno?</label>

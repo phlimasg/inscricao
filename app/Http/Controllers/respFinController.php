@@ -63,7 +63,7 @@ class respFinController extends Controller
     public function save(REQUEST $request, $cpf){
         $request->validate([
             'nome' => 'string|required|max:254',
-            'data' => 'required',
+            'data' => 'required|date|after_or_equal:1910-01-01',
             'tel' => 'required',
             'email' => 'string|required|max:254',
             'cidade' => 'string|required|max:25',

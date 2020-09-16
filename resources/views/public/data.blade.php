@@ -27,9 +27,56 @@
                            </select>
                        </div>
                    </div>
-                    <div class="row">
-                        <button type="submit" data-toggle="modal" data-target="#fim" class="btn btn-lg btn-danger btn-login">SALVAR</button>
-                    </div>
+<h3>                   <i class="fa fa-credit-card"></i> Dados para pagamentos com cartão de crédito: </h3>                   
+                        <div class="row">
+                          <div class="col-sm-12">
+                            <h2 class="">Valor: R$ 50,00</h2>  
+                          </div>
+                        </div>   
+                              <div class="row">
+                                  <div class="col-sm-6">
+                                      <label for="">Nome do titular do cartão:</label>
+                                  <input type="text" name="nome" id="" class="form-control" value="{{old('nome')}}">
+                                  
+                                  </div>            
+                              </div>        
+                              
+                          <div class="row">
+                              <div class="col-sm-6">
+                                  <label for="">Número do cartão:</label>
+                                  <input type="text" name="numero" id="" class="form-control" value="{{old('numero')}}">
+                                  
+                              </div>
+                              <div class="col-sm-3">
+                                  <label for="">Código de segurança:</label>
+                                  <input type="text" name="cod" id="" class="form-control" value="{{old('cod')}}" maxlength="4">
+                                  
+                              </div>                      
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-4">
+                                  <label for="">Data de validade:</label>                
+                              </div>               
+                          </div>
+                          <div class="row">
+                              <div class="col-sm-2">
+                                  <label for="">Mês:</label>
+                                  <input type="text" name="mes" id="" class="form-control" value="{{old('mes')}}" max="99" maxlength="2">
+                                  
+                              </div>
+                              <div class="col-sm-2">
+                                  <label for="">Ano:</label>
+                                  <input type="text" name="ano" id="" class="form-control" value="{{old('ano')}}" max="99" maxlength="2">
+                                  
+                              </div>
+                          </div>   
+                                                                    
+                              <div class="row text-center">                    
+                                  <div class="col-sm-12">
+                                      <button type="submit" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#fim"><i class="fa fa-credit-card"></i> Efetuar pagamento e finalizar</button>
+                                  </div>                    
+                              </div>  
+                      </div>
                 </div>
             </div>
             <div id="fim" class="modal fade" role="dialog">
