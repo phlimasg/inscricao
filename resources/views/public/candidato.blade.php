@@ -151,7 +151,7 @@
                     <h2>Anexo de Comprovantes</h2>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Boletim primeiro semestre de 2020</label>
+                            <label for="">Boletim primeiro semestre de 2020 - Obrigatorio do ef em diante</label>
                             <input type="file" name="documento[]" id="" class="form-control" required multiple accept="image/jpg, image/jpeg, application/pdf">
                         </div>
                     </div>

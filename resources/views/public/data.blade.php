@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container-fluid title">
-        <h1>Dia da Avaliação</h1>
+        <h1>Reunião com a Coordenação</h1>
     </div>
     <form action="{{route('inscrever')}}" method="post">
         <input type="text" value="{{$cpf}}" hidden name="cpf">
@@ -18,12 +18,15 @@
                    @endif
                    <div class="row">
                        <div class="col-sm-4">
-                           <label for="">Selecione o dia da Avaliação:</label>
+                           <label for="">Escolha o dia:</label>
                            <select name="avaliacao_id" id="" class="form-control" required>
                                <option value=""></option>
                                @foreach($a as $dia)
-                               @if($dia->qtdInscritos()->count() < $dia->VAGAS)
-                                <option value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS {{$dia->HORAPROVA}} </option>
+                                @if($dia->qtdInscritos()->count() < $dia->VAGAS)
+                                    <option value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS {{$dia->HORAPROVA}} </option> 
+                                    @php
+                                        break;
+                                    @endphp                              
                                 @endif
                                @endforeach
                            </select>
