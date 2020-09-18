@@ -29,10 +29,10 @@ class CreateGetnetReturnsTable extends Migration
             $table->string('acquirer_transaction_id');
             $table->string('transaction_id');
             $table->string('code');
-            $table->unsignedInteger('ext_inscricaos_id');
-            $table->foreign('ext_inscricaos_id')
+            $table->unsignedInteger('inscricaos_id');
+            $table->foreign('inscricaos_id')
                 ->references('id')
-                ->on('ext_inscricaos')
+                ->on('inscricaos')
                 ->onDelete('cascade');
             $table->timestamps();
         });
