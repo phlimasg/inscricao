@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CandidatoRequest;
 use App\Model\avaliacao;
 use App\Model\candidato;
 use App\Model\documentos;
@@ -46,43 +47,11 @@ class candidatoController extends Controller
             ->where('id', $id)
             ->get();
     }
-    public function save(Request $request, $cpf)
-    {
-        $request->validate([
-            'nome' => 'string|required|max:254',
-            'data' => 'required|date|after_or_equal:1910-01-01',
-            'nat_cidade'=> 'string|required|max:254',
-            'rua'=> 'string|required|max:254',
-            'bairro'=> 'string|required|max:254',
-            'cidade'=> 'string|required|max:254',
-            'estado'=> 'string|required|max:254',
-            'cep'=> 'string|required|max:254',
-            'tel' => 'required',            
-            'cidade' => 'string|required|max:25',
-            'estado' => 'required',
-            'turno'=> 'required',
-            'nomef1'=> 'string|required|max:254',
-            'nomef2'=> 'string|required|max:254',
-            'dataf1'=> 'required|date|after_or_equal:1910-01-01',
-            'dataf2'=> 'required|date|after_or_equal:1910-01-01',
-            'cidadef1'=> 'string|required|max:254',
-            'cidadef2'=> 'string|required|max:254',
-            'estadof1'=> 'string|required|max:254',
-            'estadof2'=> 'string|required|max:254',
-            'documento.*' => 'required|file|mimes:jpeg,jpg,pdf,PDF|max:5000',
-            'documento_opcional.*' => 'file|mimes:jpeg,jpg,pdf,PDF|max:5000',//8MB
-        ],
-        [
-            'required' => 'Campo Obrigatório',
-            'required_if' => 'Campo Obrigatório',
-            'digits_between' => 'Min. de :min e max. :max digitos',
-            'min' => 'Mínimo de :min de caracteres',
-            'max' => 'Limite de :max caracteres',
-            'numeric' => 'Somente números',
-            'mimes' => 'O documento deve ser formato:jpeg,jpg,pdf',
-        ]);
-        //dd($request->documento);
-        $c = new candidato();
+    public function save(CandidatoRequest $request, $cpf)
+    {        
+        
+        try {
+            $c = new candidato();
         $c->NOME = $request->nome;
         $c->DTNASC = $request->data;
         $c->NAT = $request->nat_cidade . ' - ' . $request->nat_estado;
@@ -120,6 +89,10 @@ class candidatoController extends Controller
         $f->NATEST_2 = $request->estadof2;
         $f->save();
         return redirect('/inscricao/candidato/prova/' . $cpf . '/' . $c->id);
+        } catch (\Exception $e) {
+            return dd($e);
+        }
+        
     }
     public function diaProva($cpf, $id_candidato)
     {

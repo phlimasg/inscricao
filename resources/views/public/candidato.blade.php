@@ -6,6 +6,11 @@
     <form action="{{url('inscricao/candidato/save/'.$cpf)}}" method="post" enctype="multipart/form-data" id="formCandidato">
         <div class="container-fluid form">
             <div class="container ">
+                @if (session('mensagem'))
+                    <div class="alert alert-success">
+                        {{ session('mensagem') }}
+                    </div>
+                @endif
                 @if($errors->all())
                     <div class="alert alert-danger">
                         @foreach ($errors->all() as $error)
@@ -152,19 +157,22 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="">Certidão de Nascimento</label>
-                            <input type="file" name="documento[]" id="" class="form-control" required multiple accept="image/jpg, image/jpeg, application/pdf">
+                            <input type="file" name="documento[]" id="" max-size="5000" class="form-control" required accept="image/jpg, image/jpeg, application/pdf">
+                            <small>Max. de 5Mb</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="">Boletim primeiro semestre de 2020 - (Exceto Educação Infantil)</label>
-                            <input type="file" name="documento_opcional[]" id="file_ef" class="form-control" multiple required accept="image/jpg, image/jpeg, application/pdf">
+                            <input type="file" name="documento_opcional[]" id="file_ef" max-size="5000" class="form-control" required accept="image/jpg, image/jpeg, application/pdf">
+                            <small>Max. de 5Mb</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="">Comprovante de escolaridade(Somente Educação Infantil)</label>
-                            <input type="file" name="documento_opcional[]" id="file_ei" class="form-control" multiple accept="image/jpg, image/jpeg, application/pdf">
+                            <input type="file" name="documento_opcional[]" id="file_ei" max-size="5000" class="form-control" accept="image/jpg, image/jpeg, application/pdf">
+                            <small>Max. de 5Mb</small>
                         </div>
                     </div>                    
                         <div class="row form">
@@ -303,6 +311,19 @@
 
         </div>
     </div>
+    <div id="saveModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content modal-loading">
+                <div class="modal-body" align="center">
+                    <img src="{{url('images/loading.gif')}}" alt="" width="150px"><br>
+                    Salvando dados...
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- Modal -->
 <div id="aviso" class="modal fade" role="dialog">
@@ -357,6 +378,7 @@
         $('#formCandidato').submit(function(){
             $(this).find(':input[type=submit]').prop('disabled', true);
             //alert('entrou');
+            $('#saveModal').modal('show');
         });
         $(function($){
             var SPMaskBehavior = function (val) {

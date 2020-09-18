@@ -46,6 +46,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof \Illuminate\Http\Exceptions\PostTooLargeException)
+            return redirect()->back()->with('mensagem','Arquivo maior que 5mb');
         return parent::render($request, $exception);
     }
 }
