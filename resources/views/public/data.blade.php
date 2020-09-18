@@ -17,12 +17,14 @@
                     </div>
                    @endif
                    <div class="row">
-                       <div class="col-sm-3">
+                       <div class="col-sm-4">
                            <label for="">Selecione o dia da Avaliação:</label>
                            <select name="avaliacao_id" id="" class="form-control" required>
                                <option value=""></option>
                                @foreach($a as $dia)
-                               <option value="{{$dia->id}}">@if($dia->DTPROVA=="2020-06-07")Agendar na secretaria @else{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS 9H @endif</option>
+                               @if($dia->qtdInscritos()->count() < $dia->VAGAS)
+                                <option value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS {{$dia->HORAPROVA}} </option>
+                                @endif
                                @endforeach
                            </select>
                        </div>
@@ -30,7 +32,7 @@
 <h3>                   <i class="fa fa-credit-card"></i> Dados para pagamentos com cartão de crédito: </h3>                   
                         <div class="row">
                           <div class="col-sm-12">
-                            <h2 class="">Valor: R$ 50,00</h2>  
+                            <h2 class=""><b>Valor: R$ 50,00</b></h2>  
                           </div>
                         </div>   
                               <div class="row">
@@ -70,7 +72,7 @@
                                   
                               </div>
                           </div>   
-                                                                    
+                                      <hr>                              
                               <div class="row text-center">                    
                                   <div class="col-sm-12">
                                       <button type="submit" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#fim"><i class="fa fa-credit-card"></i> Efetuar pagamento e finalizar</button>

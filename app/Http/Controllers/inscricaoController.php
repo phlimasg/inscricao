@@ -167,8 +167,8 @@ class inscricaoController extends Controller
     }
     public function concluido($id)
     {
-
-        $c = inscricaoView::where('id', $id)
+        //dd($id);
+        $c = inscricaoView::where('NINSC', $id)
             ->groupBy('id')
             ->first();
         //dd($c);

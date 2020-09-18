@@ -49,7 +49,7 @@ class candidatoController extends Controller
     public function save(Request $request, $cpf)
     {
         $request->validate([
-            /*'nome' => 'string|required|max:254',
+            'nome' => 'string|required|max:254',
             'data' => 'required|date|after_or_equal:1910-01-01',
             'nat_cidade'=> 'string|required|max:254',
             'rua'=> 'string|required|max:254',
@@ -68,7 +68,7 @@ class candidatoController extends Controller
             'cidadef1'=> 'string|required|max:254',
             'cidadef2'=> 'string|required|max:254',
             'estadof1'=> 'string|required|max:254',
-            'estadof2'=> 'string|required|max:254',*/
+            'estadof2'=> 'string|required|max:254',
             'documento.*' => 'required|file|mimes:jpeg,jpg,pdf,PDF|max:20000',
             'documento_opcional.*' => 'file|mimes:jpeg,jpg,pdf,PDF|max:20000',//20MB
         ],
@@ -128,15 +128,17 @@ class candidatoController extends Controller
         $qtd = inscricaoQtdView::selectRaw('(QTD_VAGAS-QTD_INSCRITOS) AS VAGAS')
             ->where('ID', $esc_id->ESCOLARIDADE_ID)
             ->first();
-        //dd($esc_id->INTEGRAL_ID);
+        //dd($esc_id,$esc_vag,$qtd);
         if ($esc_id->INTEGRAL_ID == null) {
             if ($esc_vag->QTD_VAGAS > 0) {
                 if ($qtd == null or $qtd->VAGAS > 0) {
-                    $a = avaliacao::where('DTLIMITE_INSC', '>', date('Y-m-d'))
+                    $a = avaliacao::where('DTLIMITE_INSC', '>=', date('Y-m-d'))
+                        ->where('ESCOLARIDADE_ID',$esc_id->ESCOLARIDADE_ID)
                         ->orderBy('DTLIMITE_INSC')
-                        ->limit(1)
+                        //->limit(1)
                         ->get();
-                    // dd($a);
+                      //  ->first();
+                    //dd($a->qtdInscritos()->count());
                     return view('public.data', compact(['a', 'cpf', 'id_candidato']));
                 } else {
                     $candidato = candidato::where('id', $id_candidato)->first();
@@ -222,7 +224,7 @@ class candidatoController extends Controller
         $count=1;
         foreach ($upload as $i){
             $doc = new documentos();
-            $namefile = rand(9999).'_'.date('d-m-Y_H-m-s').'_'.Str::kebab($i->getClientOriginalName());
+            $namefile = rand(0,9999).'_'.date('d-m-Y_H-m-s').'_'.Str::kebab($i->getClientOriginalName());
             $up = $i->storeAs('/'.'/public/upload/documentos/'.$id,$namefile);
             //dd(storage_path(),$up);
             //chmod(storage_path('/app/public/upload/documentos/'),0777);
