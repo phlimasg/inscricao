@@ -29,7 +29,7 @@ class CreateGetnetReturnsTable extends Migration
             $table->string('acquirer_transaction_id');
             $table->string('transaction_id');
             $table->string('code');
-            $table->unsignedBigInteger('ext_inscricaos_id');
+            $table->unsignedInteger('ext_inscricaos_id');
             $table->foreign('ext_inscricaos_id')
                 ->references('id')
                 ->on('ext_inscricaos')
