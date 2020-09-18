@@ -17,7 +17,7 @@ class CreateDocumentosTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('url');
-            $table->unsignedBigInteger('candidato_id');
+            $table->unsignedInteger('candidato_id');
             $table->foreign('candidato_id')->references('id')->on('candidatos')->onDelete('cascade');
             $table->timestamps();
         });
