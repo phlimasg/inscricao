@@ -69,8 +69,8 @@ class candidatoController extends Controller
             'cidadef2'=> 'string|required|max:254',
             'estadof1'=> 'string|required|max:254',
             'estadof2'=> 'string|required|max:254',
-            'documento.*' => 'required|file|mimes:jpeg,jpg,pdf,PDF|max:20000',
-            'documento_opcional.*' => 'file|mimes:jpeg,jpg,pdf,PDF|max:20000',//20MB
+            'documento.*' => 'required|file|mimes:jpeg,jpg,pdf,PDF|max:5000',
+            'documento_opcional.*' => 'file|mimes:jpeg,jpg,pdf,PDF|max:5000',//8MB
         ],
         [
             'required' => 'Campo Obrigatório',

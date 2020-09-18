@@ -3,7 +3,7 @@
     <div class="container-fluid title">
         <h1>Dados do Candidato - Aluno(a)</h1>
     </div>
-    <form action="{{url('inscricao/candidato/save/'.$cpf)}}" method="post" enctype="multipart/form-data">
+    <form action="{{url('inscricao/candidato/save/'.$cpf)}}" method="post" enctype="multipart/form-data" id="formCandidato">
         <div class="container-fluid form">
             <div class="container ">
                 @if($errors->all())
@@ -151,20 +151,20 @@
                     <h2>Anexo de Comprovantes</h2>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Boletim primeiro semestre de 2020 - Obrigatorio do ef em diante</label>
-                            <input type="file" name="documento[]" id="" class="form-control" required multiple accept="image/jpg, image/jpeg, application/pdf">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
                             <label for="">Certidão de Nascimento</label>
                             <input type="file" name="documento[]" id="" class="form-control" required multiple accept="image/jpg, image/jpeg, application/pdf">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Comprovante de escolaridade(Somente para EI)</label>
-                            <input type="file" name="documento_opcional[]" id="" class="form-control" multiple accept="image/jpg, image/jpeg, application/pdf">
+                            <label for="">Boletim primeiro semestre de 2020 - (Exceto Educação Infantil)</label>
+                            <input type="file" name="documento_opcional[]" id="file_ef" class="form-control" multiple required accept="image/jpg, image/jpeg, application/pdf">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <label for="">Comprovante de escolaridade(Somente Educação Infantil)</label>
+                            <input type="file" name="documento_opcional[]" id="file_ei" class="form-control" multiple accept="image/jpg, image/jpeg, application/pdf">
                         </div>
                     </div>                    
                         <div class="row form">
@@ -285,7 +285,7 @@
                     </div>
                     </div>
                     <div class="row">
-                        <button class="btn btn-lg btn-danger btn-login">SALVAR</button>
+                        <button type="submit" class="btn btn-lg btn-danger btn-login">SALVAR</button>
                     </div>
                 </div>
             </div>
@@ -354,7 +354,10 @@
 
     <script>
         $("#aviso").modal();
-
+        $('#formCandidato').submit(function(){
+            $(this).find(':input[type=submit]').prop('disabled', true);
+            //alert('entrou');
+        });
         $(function($){
             var SPMaskBehavior = function (val) {
                     return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
@@ -372,6 +375,17 @@
         $('#esc').change(function() {
             $("#loading").modal();
             var esc = $("#esc").val();
+            if(esc != 'EDUCAÇÃO INFANTIL'){
+                $('#file_ei').attr('name','documento_opcional[]');
+                $('#file_ef').attr('name','documento[]');
+                $('#file_ef').attr('required','required');
+                $('#file_ei').removeAttr('required','required');
+            }else{
+                $('#file_ei').attr('name','documento[]');
+                $('#file_ei').attr('required','required');
+                $('#file_ef').removeAttr('required','required');
+                $('#file_ef').attr('name','documento_opcional[]'); 
+            }
             if(esc != 'ENSINO MÉDIO'){
                 $('#div_integral').show(500);
             }
