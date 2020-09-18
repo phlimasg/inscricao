@@ -153,7 +153,7 @@ class inscricaoController extends Controller
             $getnet->acquirer_transaction_id = $retorno->credit->acquirer_transaction_id;
             $getnet->transaction_id = $retorno->credit->transaction_id;
             $getnet->code = $retorno->code;
-            $getnet->ext_inscricaos_id = $i->id;
+            $getnet->inscricaos_id = $i->id;
             $getnet->save();
             //Mail::to($candidato->FINMAIL)->queue(new InscricaoConcluido($candidato));
             return $this->concluido($i->id);
