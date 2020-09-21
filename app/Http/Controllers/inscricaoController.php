@@ -57,8 +57,8 @@ class inscricaoController extends Controller
                 $i = new inscricao();
                 $i->CANDIDATO_ID = $request->id_candidato;
                 $i->AVALIACAO_ID = $request->avaliacao_id;
-                $i->PAGAMENTO = 0;
-                $i->PAGAMENTO_DATA = null;
+                $i->PAGAMENTO = 1;
+                $i->PAGAMENTO_DATA = date('Y-m-d');
                 $i->save();
                 $candidato = candidato::where('id', $request->id_candidato)->first();
                 $candidato->espera = 0;
@@ -161,6 +161,7 @@ class inscricaoController extends Controller
             //$e->getRequest()
             $error = json_decode($e->getResponse()->getBody(), true);
             //dd($error);
+            inscricao::destroy($i->id);
             return redirect()->back()->with('error', $error);
             //return view('errors.error', compact('e'));
         }

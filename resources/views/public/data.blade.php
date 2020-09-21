@@ -37,6 +37,16 @@
                           <div class="col-sm-12">
                             <h2 class=""><b>Valor: R$ 50,00</b></h2>  
                           </div>
+                          @if(session('error'))
+                          <div class="row">
+                            <div class="col-sm-12">
+                                <div class="alert alert-danger">
+                                    <b>ERRO</b>
+                                    {{session('error')['status_code']}} - {{session('error')['details'][0]['description_detail']}}
+                                </div>
+                            </div>      
+                        </div>  
+                        @endif
                         </div>   
                               <div class="row">
                                   <div class="col-sm-6">
@@ -74,7 +84,7 @@
                                   <input type="text" name="ano" id="" class="form-control" value="{{old('ano')}}" max="99" maxlength="2">
                                   
                               </div>
-                          </div>   
+                          </div>                           
                                       <hr>                              
                               <div class="row text-center">                    
                                   <div class="col-sm-12">
