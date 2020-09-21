@@ -171,7 +171,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <label for="">Comprovante de escolaridade(Somente Educação Infantil)</label>
-                            <input type="file" name="documento_opcional[]" id="file_ei" max-size="5000" class="form-control" accept="image/jpg, image/jpeg, application/pdf">
+                            <input type="file" name="documento_opcional[]" id="" max-size="5000" class="form-control" accept="image/jpg, image/jpeg, application/pdf">
                             <small>Max. de 5Mb</small>
                         </div>
                     </div>                    
