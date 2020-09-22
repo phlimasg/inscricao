@@ -41,8 +41,8 @@
                           <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-danger">
-                                    <b>ERRO</b>
-                                    {{session('error')['status_code']}} - {{session('error')['details'][0]['description_detail']}}
+                                    <b>ERRO NO PAGAMENTO, TENTE NOVAMENTE</b>
+                                    {{!empty(session('error')['status_code'])}} - {{!empty(session('error')['details'][0]['description_detail'])}}
                                 </div>
                             </div>      
                         </div>  
