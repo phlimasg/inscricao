@@ -167,6 +167,10 @@ class inscricaoController extends Controller
             return redirect()->back()->with('error', $error);
             //return view('errors.error', compact('e'));
         }
+        catch (\Exception  $e) {
+            inscricao::destroy($i->id);
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
     public function concluido($id)
     {
