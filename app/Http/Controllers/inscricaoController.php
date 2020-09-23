@@ -156,7 +156,9 @@ class inscricaoController extends Controller
             $getnet->inscricaos_id = $i->id;
             $getnet->save();
             //Mail::to($candidato->FINMAIL)->queue(new InscricaoConcluido($candidato));
-            return $this->concluido($i->id);
+            //dd($i);
+            return redirect(url('/inscricao/concluido/'.$i->id));
+            //return $this->concluido($i->id);
         } catch (RequestException  $e) {
             //$e->getRequest()
             $error = json_decode($e->getResponse()->getBody(), true);
