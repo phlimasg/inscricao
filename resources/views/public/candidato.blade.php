@@ -163,14 +163,14 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Boletim primeiro semestre de 2020 - (Exceto Educação Infantil)</label>
-                            <input type="file" name="documento_opcional[]" id="file_ef" max-size="5000" class="form-control" required accept="image/jpg, image/jpeg, application/pdf">
+                            <label for="">Boletim primeiro semestre de 2020 - (Obrigatório a Partir do 2º ano)</label>
+                            <input type="file" name="documento_opcional[]" id="" max-size="5000" class="form-control" required accept="image/jpg, image/jpeg, application/pdf">
                             <small>Max. de 5Mb</small>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Comprovante de escolaridade(Somente Educação Infantil)</label>
+                            <label for="">Comprovante de escolaridade(Obrigatório a Partir da Creche 2)</label>
                             <input type="file" name="documento_opcional[]" id="" max-size="5000" class="form-control" accept="image/jpg, image/jpeg, application/pdf">
                             <small>Max. de 5Mb</small>
                         </div>
