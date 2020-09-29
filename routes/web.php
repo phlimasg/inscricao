@@ -27,6 +27,8 @@ Route::group(['prefix'=>'/inscricao'], function (){
     Route::get('/{cpf}/candidato','candidatoController@index');
     Route::post('/{cpf}/savecandidato','respAcadController@save');
 
+    Route::get('/candidato/falta_documento/{cpf}/{id}','candidatoController@faltaDocumento');
+    Route::post('/candidato/falta_documento/{cpf}/{id}','candidatoController@documentosFaltantes')->name('documentosfaltantes');
     Route::get('/candidato/prova/{cpf}/{id}','candidatoController@diaProva');
     Route::get('/candidato/infos/{cpf}/{insc}','candidatoController@gerarPdf');
     Route::post('/candidato/inscricao','inscricaoController@inscrever')->name('inscrever');

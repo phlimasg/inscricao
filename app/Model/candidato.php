@@ -11,4 +11,8 @@ class candidato extends Model
     {
         return $this->hasMany(historico::class, 'id_cand_insc','id')->orderBy('created_at','desc');
     }
+    public function Mensagens()
+    {
+        return $this->hasMany(Mensagem::class,'CANDIDATO_ID','id');
+    }
 }

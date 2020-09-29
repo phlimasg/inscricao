@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CandidatoRequest;
+use App\Http\Requests\FaltaDocumentoRequest;
 use App\Model\avaliacao;
 use App\Model\candidato;
 use App\Model\documentos;
@@ -215,5 +216,22 @@ class candidatoController extends Controller
                     ->withInput();
             $count++;
         }
+    }
+
+    public function faltaDocumento($cpf,$id)
+    {
+        $candidato = candidato::where('RESPFIN_CPF',$cpf)->where('id',$id)->first();        
+        if($candidato && $candidato->Mensagens()->latest()->first())
+            return view('public.faltaDocumento',compact('candidato'));
+        return abort(404, 'CANDIDATO NÃO ENCONTRADO');
+    }
+    public function documentosFaltantes(FaltaDocumentoRequest $request, $cpf, $id)
+    {        
+        $this->fileUpload($request->documento, $id);
+        $candidato = candidato::find($id);
+        $candidato->status = null;
+        $candidato->save();
+        return view('public.faltaDocumentoFinal');
+        
     }
 }
