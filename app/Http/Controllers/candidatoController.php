@@ -97,6 +97,8 @@ class candidatoController extends Controller
     }
     public function diaProva($cpf, $id_candidato)
     {
+        if(!candidato::where('RESPFIN_CPF',$cpf)->where('id',$id_candidato)->first())
+            return abort(404, 'O Aluno não pertence a esse responsável.');
         $esc_id = candidato::select('ESCOLARIDADE_ID', 'INTEGRAL_ID')->where('id', $id_candidato)->first();
         $esc_vag = escolaridade::select('QTD_VAGAS')->where('id', $esc_id->ESCOLARIDADE_ID)->first();
         $qtd = inscricaoQtdView::selectRaw('(QTD_VAGAS-QTD_INSCRITOS) AS VAGAS')
