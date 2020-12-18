@@ -10,13 +10,13 @@
                    Prezado(a) {{$c->FINNOME}}, <br><br>
                    Confirmamos os dados para a inscrição do aluno(a) {{$c->CNOME}}.<br>
                    <div style="color: #003c7f; background: white; padding: 15px">                       
-                    A AVALIAÇÃO DIAGNÓSTICA PARA {{date('Y')+1}} SERÁ REALIZADA DE FORMA DIFERENTE DOS ANOS ANTERIORES, POR ISSO, FIQUE ATENTO(A) ÀS ETAPAS DO PROCESSO:
+                    A AVALIAÇÃO DIAGNÓSTICA PARA 2021 SERÁ REALIZADA DE FORMA DIFERENTE DOS ANOS ANTERIORES, POR ISSO, FIQUE ATENTO(A) ÀS ETAPAS DO PROCESSO:
                     <br>
                     <ul>
                         <li>RESERVA DE VAGA COM O PAGAMENTO DA TAXA - R$50,00
                         </li>
                         <li>
-                            AGENDAMENTO DE AVALIAÇÃO ONLINE COM A ORIENTAÇÃO EDUCACIONAL
+                            AVALIAÇÃO DOS DOCUMENTOS ENVIADOS NO MOMENTO DA INSCRIÇÃO
                         </li>
                         <li>
                             ENVIO DO KIT DE MATRÍCULA PARA O ENDEREÇO CADASTRADO NO FORMULÁRIO                            
@@ -29,7 +29,7 @@
                         </li>
                     </ul>
 
-                       A Avaliação ocorrerá no dia @if($c->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($c->DTPROVA))}} AS {{$c->HORAPROVA}}@endif.                       
+                       A reunião ocorrerá no dia @if($c->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($c->DTPROVA))}} AS {{$c->HORAPROVA}}@endif.                       
                    </div>
 <!--
                    <div>
@@ -40,10 +40,7 @@
                    <br>
                 -->
 
-                <br>
-                   <p><b>AGENDAMENTO DE AVALIAÇÃO ONLINE COM A ORIENTAÇÃO EDUCACIONAL</b></p>
-                   <p>O AGENDAMENTO DA ENTREVISTA SERÁ REALIZADO POR TELEFONE OU EMAIL, QUE FORAM CADASTRADOS NO MOMENTO DO PREENCHIMENTO DA FICHA.</p>
-                   <br>
+                <br>                   
                    <p><b>ENVIO DO KIT DE MATRÍCULA </b></p>
                    <p>O KIT DE MATRÍCULAS, QUE CONTÉM  OS DOCUMENTOS NECESSÁRIOS PARA O INGRESSO, SERÁ ENVIADO AO ENDEREÇO CADASTRADO NO MOMENTO DO PREENCHIMENTO DA FICHA, NA SEMANA DA REUNIÃO COM A COORDENAÇÃO PEDAGÓGICA.</p>
                    <br>
@@ -86,10 +83,10 @@
                    <p>AS TURMAS DO TURNO COMPLEMENTAR SERÃO FORMADAS CASO ATINJAM O NÚMERO MÍNIMO DE ALUNOS MATRICULADOS POR ANO DE ESCOLARIDADE.</p>
                    <br>
                    <p><b>AGENDAMENTO DE VISITAS</b></p>
-                   <p>ESTAMOS COM A NOSSA AGENDA DE VISITAS ABERTA, SEGUINDO AS NORMAS DE SAÚDE DOS ÓRGÃOS COMPETENTES. CASO TENHA INTERESSE EM REALIZAR UMA VISITA AO COLÉGIO PARA CONHECER AS INSTALAÇÕES, ENVIE UM EMAIL PARA ATENDIMENTO.ABEL@LASALLE.ORG.BR E  AGENDE.</p>
+                   <p>ESTAMOS COM A NOSSA AGENDA DE VISITAS ABERTA, SEGUINDO AS NORMAS DE SAÚDE DOS ÓRGÃOS COMPETENTES. CASO TENHA INTERESSE EM REALIZAR UMA VISITA AO COLÉGIO PARA CONHECER AS INSTALAÇÕES, ENVIE UM EMAIL PARA ATENDIMENTO.ABEL@LASALLE.ORG.BR E AGENDE.</p>
                    <br>                   
                    <p><b>IMPORTANTE: </b></p>
-                   <p>A AVALIAÇÃO SERÁ REALIZADA COM BASE NOS DOCUMENTOS ENVIADOS E NA ENTREVISTA COM A ORIENTAÇÃO EDUCACIONAL, POR ISSO, ENCAMINHE TODOS OS DOCUMENTOS NECESSÁRIOS, POIS, SEM ELES, NÃO PODEREMOS AGENDAR A REALIZAÇÃO DA ETAPA SEGUINTE. CASO TENHA DEIXADO DE ENVIAR ALGUM DOCUMENTO, ENVIE POR EMAIL PARA ATENDIMENTO.ABEL@LASALLE.ORG.BR E CONCLUA A INSCRIÇÃO.</p>
+                   <p>A AVALIAÇÃO SERÁ REALIZADA COM BASE NOS DOCUMENTOS ENVIADOS, POR ISSO, ENCAMINHE TODOS OS DOCUMENTOS NECESSÁRIOS, POIS, SEM ELES, NÃO PODEREMOS AGENDAR A REALIZAÇÃO DA ETAPA SEGUINTE. CASO TENHA DEIXADO DE ENVIAR ALGUM DOCUMENTO, ENVIE POR EMAIL PARA ATENDIMENTO.ABEL@LASALLE.ORG.BR E CONCLUA A INSCRIÇÃO. OS CANDIDATOS QUE NECESSITAREM DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO REALIZAÇÃO UMA ENTREVISTA VIRTUAL COM A COORDENAÇÃO DO SEGMENTO OU COM EQUIPE DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO.</p>
                    <br>
                    <p>EM CASO DE DÚVIDAS, ENVIE UM EMAIL PARA ATENDIMENTO.ABEL@LASALLE.ORG.BR</p>
                    
