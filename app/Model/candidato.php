@@ -15,4 +15,9 @@ class candidato extends Model
     {
         return $this->hasMany(Mensagem::class,'CANDIDATO_ID','id');
     }
+
+    public function respFin()
+    {
+        return $this->hasOne(respFin::class,'CPF','RESPFIN_CPF');
+    }
 }

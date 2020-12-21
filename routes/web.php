@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::post('/validaCpf', 'respFinController@validaCpf')->name('validaCpf');
-
+Route::get('/lista_de_espera/{token}','candidatoController@listaDeEspera')->name('espera.token');
 Route::group(['prefix'=>'/inscricao'], function (){
     Route::get('/{cpf}/respfin','respFinController@index');
     Route::post('/{cpf}/savefin','respFinController@save');

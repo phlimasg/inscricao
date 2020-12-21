@@ -24,7 +24,7 @@ class inscricaoController extends Controller
     public function inscrever(Request $request)
     {
 
-        //dd($request->all(), $respfin,$firstname,$lastname, $candidato);
+        //dd($request->all());//, $respfin,$firstname,$lastname, $candidato);
 
         $request->validate([
             'nome' => 'required|string',
@@ -157,6 +157,9 @@ class inscricaoController extends Controller
             $getnet->save();
             //Mail::to($candidato->FINMAIL)->queue(new InscricaoConcluido($candidato));
             //dd($i);
+            $candidato->token = null;
+            $candidato->liberacao_data = null;
+            $candidato->save();
             return redirect(url('/inscricao/concluido/'.$i->id));
             //return $this->concluido($i->id);
         } catch (RequestException  $e) {

@@ -236,4 +236,21 @@ class candidatoController extends Controller
         return view('public.faltaDocumentoFinal');
         
     }
+
+    public function listaDeEspera($token)
+    {   
+        $candidato = candidato::where('token',$token)
+        ->whereBetween('liberacao_data',[date('Y-m-d H:i:s', strtotime('-48 hours')),date('Y-m-d H:i:s')])
+        ->firstOrFail();
+        //dd(date('Y-m-d H:i:s', strtotime('-48 hours')),date('Y-m-d H:i:s'),$candidato);        
+        $a = avaliacao::where('ESCOLARIDADE_ID', $candidato->ESCOLARIDADE_ID)
+        ->where('DTLIMITE_INSC','>=', date('Y-m-d'))
+        ->get();        
+        return view('public.pagamentoEspera', compact(
+            [
+                'candidato',
+                'a', 'cpf', 'id_candidato', 'integral_espera']
+        ));
+
+    }
 }
