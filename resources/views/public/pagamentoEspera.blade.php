@@ -20,7 +20,7 @@
                        <div class="col-sm-12">
                            Olá {{$candidato->respFin->NOME}}, Finalize a inscrição de {{$candidato->NOME}}. 
                            <div class="alert alert-danger">                               
-                                Esse link irá expirar em: <span class="text-danger">{{date('H:i:s d/m/Y', strtotime('+48 hours', strtotime($candidato->liberacao_data)))}}</span>.
+                                Esse link irá expirar em: <span class="text-danger">{{date('d/m/Y H:i:s', strtotime('+48 hours', strtotime($candidato->liberacao_data)))}}</span>.
                                
                            </div>
                        </div>
