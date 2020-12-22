@@ -159,6 +159,7 @@ class inscricaoController extends Controller
             //dd($i);
             $candidato->token = null;
             $candidato->liberacao_data = null;
+            $candidato->ESPERA = null;
             $candidato->save();
             return redirect(url('/inscricao/concluido/'.$i->id));
             //return $this->concluido($i->id);
