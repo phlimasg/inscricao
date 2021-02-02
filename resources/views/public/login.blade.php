@@ -1,7 +1,8 @@
 @extends('layouts.layout')
 @section('content')
     <div class="container-fluid title text-center">
-        <h1>Inscrição para alunos novos {{date('Y')+1}}</h1>
+        <h1>Inscrição para alunos novos {{date('m')>=5 ? date('Y')+1: date('Y')}}</h1>
+        
     </div>
     <div class="container-fluid form">
         <div class="container ">
