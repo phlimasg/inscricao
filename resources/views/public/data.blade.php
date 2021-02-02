@@ -3,7 +3,7 @@
     <div class="container-fluid title">
         <h1>Reunião com a Coordenação</h1>
     </div>
-    <form action="{{route('inscrever')}}" method="post">
+    <form action="{{route('inscrever')}}" method="post" id="form">
         <input type="text" value="{{$cpf}}" hidden name="cpf">
         <input type="text" value="{{$id_candidato}}" hidden name="id_candidato">
         <div class="container-fluid form">
@@ -48,7 +48,8 @@
                                     {!! !empty(session('error')['details'][0]['description'])? '<p>Descrição do erro: '.session('error')['details'][0]['description'].'</p>':''!!}
                                     {!! !empty(session('error')['details'][0]['description_detail'])? '<p>Detalhes do erro: '.session('error')['details'][0]['description_detail'].'</p>':''!!}
                                     {!! !empty(session('error')['details'][0]['error_code'])? '<p>Código do operadora: '.session('error')['details'][0]['error_code'].'</p>':''!!}
-                                    {!! !empty(session('error')['details'][0]['antifraud'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}                                    
+                                    {!! !empty(session('error')['details'][0]['antifraud']['status_code'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}                                    
+                                    
                                 </div>
                             </div>      
                         </div>  
@@ -94,7 +95,7 @@
                                       <hr>                              
                               <div class="row text-center">                    
                                   <div class="col-sm-12">
-                                      <button type="submit" class="btn btn-success btn-lg btn-block" data-toggle="modal" data-target="#fim"><i class="fa fa-credit-card"></i> Efetuar pagamento e finalizar</button>
+                                      <button type="submit" class="btn btn-success btn-lg btn-block" ><i class="fa fa-credit-card"></i> Efetuar pagamento e finalizar</button>
                                   </div>                    
                               </div>  
                       </div>
@@ -118,4 +119,9 @@
                     </div>
                   </div>
     </form>
+    <script>
+        $( "#form" ).submit(function() {
+            $('#fim').modal('show')
+        });
+    </script>
 @endsection()
