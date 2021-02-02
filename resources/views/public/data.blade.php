@@ -47,8 +47,8 @@
                                     <p>Código de erro:{{session('error')['status_code']}}</p>
                                     {!! !empty(session('error')['details'][0]['description'])? '<p>Descrição do erro: '.session('error')['details'][0]['description'].'</p>':''!!}
                                     {!! !empty(session('error')['details'][0]['description_detail'])? '<p>Detalhes do erro: '.session('error')['details'][0]['description_detail'].'</p>':''!!}
-                                    {!! !empty(session('error')['details'][0]['antifraud'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}
-                                    {{dd(session('error'))}}
+                                    {!! !empty(session('error')['details'][0]['error_code'])? '<p>Código do operadora: '.session('error')['details'][0]['error_code'].'</p>':''!!}
+                                    {!! !empty(session('error')['details'][0]['antifraud'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}                                    
                                 </div>
                             </div>      
                         </div>  
