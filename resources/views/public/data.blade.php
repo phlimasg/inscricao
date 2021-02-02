@@ -41,8 +41,14 @@
                           <div class="row">
                             <div class="col-sm-12">
                                 <div class="alert alert-danger">
-                                    <b>ERRO NO PAGAMENTO, TENTE NOVAMENTE</b>
-                                    {{!empty(session('error')['status_code'])}} - {{!empty(session('error')['details'][0]['description_detail'])}}
+                                    <b>ERRO NO PAGAMENTO, TENTE NOVAMENTE</b>                                    
+                                    
+                                    <p>Mensagem: {{session('error')['message']}}</p>
+                                    <p>Código de erro:{{session('error')['status_code']}}</p>
+                                    {!! !empty(session('error')['details'][0]['description'])? '<p>Descrição do erro: '.session('error')['details'][0]['description'].'</p>':''!!}
+                                    {!! !empty(session('error')['details'][0]['description_detail'])? '<p>Detalhes do erro: '.session('error')['details'][0]['description_detail'].'</p>':''!!}
+                                    {!! !empty(session('error')['details'][0]['antifraud'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}
+                                    {{dd(session('error'))}}
                                 </div>
                             </div>      
                         </div>  
@@ -81,7 +87,7 @@
                               </div>
                               <div class="col-sm-2">
                                   <label for="">Ano:</label>
-                                  <input type="text" name="ano" id="" class="form-control" value="{{old('ano')}}" max="99" maxlength="2">
+                                  <input type="text" name="ano" id="" class="form-control" value="{{old('ano')}}" max="{{date('Y')+10}}" maxlength="4">
                                   
                               </div>
                           </div>                           
