@@ -23,7 +23,11 @@
                                <option value=""></option>
                                @foreach($a as $dia)
                                 @if($dia->qtdInscritos()->count() < $dia->VAGAS)
-                                    <option value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS {{$dia->HORAPROVA}} </option> 
+                                    @if ($dia->DTPROVA == '2020-06-07')
+                                        <option selected value="{{$dia->id}}">Entraremos em contato</option>
+                                    @else
+                                        <option selected value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS {{$dia->HORAPROVA}} </option>                                         
+                                    @endif
                                     @php
                                         break;
                                     @endphp                              
