@@ -31,7 +31,7 @@ class inscricaoController extends Controller
             'numero' => 'required|numeric',
             'cod' => 'required|numeric',
             'mes' => 'required|numeric|max:99',
-            'ano' => 'required|numeric|max:99',
+            'ano' => 'required|numeric|max:9999',
         ], [
             'string' => 'Somente texto',
             'numeric' => 'Somente números.',
