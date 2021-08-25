@@ -21,7 +21,7 @@ class inicioController extends Controller
             if($novas)
                 return view('public.login');
             else
-                return abort(403,'Período encerrado.');
+                return redirect('http://lasalle.edu.br/abel');
         }
     }
 }
