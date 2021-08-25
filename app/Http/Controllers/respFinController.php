@@ -52,6 +52,8 @@ class respFinController extends Controller
         );
         $value = preg_replace("/[^0-9]/", "", $request->cpf);
         if(respFin::where('CPF',$value)->first() == null || !empty(Session::get('aluno'))){
+            if(!empty(Session::get('aluno'))
+                return redirect(url('/inscricao/'.$value.'/respacad'));
             return redirect(url('/inscricao/'.$value.'/respfin'));
         }
         else{
