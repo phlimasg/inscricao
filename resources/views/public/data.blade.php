@@ -48,8 +48,10 @@
                                 @endif
                                @endforeach
                            </select>
+                           <b>Aviso:</b> Creches 2 e 3 não farão avaliação, somente reunião com os responsáveis.
                        </div>
                    </div>
+
                    @if (empty(Session::get('aluno')))
                        
                         <h3><i class="fa fa-credit-card"></i> Dados para pagamentos com cartão de crédito: </h3>                   
