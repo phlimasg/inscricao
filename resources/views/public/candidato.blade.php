@@ -201,13 +201,13 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <label for="">Nome:</label>
-                                <input type="text" required class="form-control" name="nomef1">
+                                <input type="text" required class="form-control" name="nomef1" value="@if (Session::get('aluno')){{Session::get('aluno')->Pai}} @else {{old('nomef1')}} @endif">
                             </div>
                         </div>
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="">Data de Nascimento:</label>
-                            <input type="date" required class="form-control" name="dataf1">
+                            <input type="date" required class="form-control" name="dataf1" value="@if (Session::get('aluno')){{date('Y-m-d',strtotime(str_replace('/','-',Session::get('aluno')->PaiDtNasc)))}}@else {{old('dataf1')}} @endif">
                         </div>
                         <div class="col-sm-4">
                             <label for="">Cidade:</label>
@@ -248,13 +248,13 @@
                         <div class="row">
                             <div class="col-sm-8">
                                 <label for="">Nome:</label>
-                                <input type="text" required class="form-control" name="nomef2">
+                                <input type="text" required class="form-control" name="nomef2" value="@if (Session::get('aluno')){{Session::get('aluno')->Mae}} @else {{old('nomef2')}} @endif">
                             </div>
                         </div>
                     <div class="row">
                         <div class="col-sm-4">
                             <label for="">Data de Nascimento:</label>
-                            <input type="date" required class="form-control" name="dataf2">
+                            <input type="date" required class="form-control" name="dataf2" value="@if (Session::get('aluno')){{date('Y-m-d',strtotime(str_replace('/','-',Session::get('aluno')->MaeDtNasc)))}}@else {{old('dataf2')}} @endif">
                         </div>
                         <div class="col-sm-4">
                             <label for="">Cidade:</label>

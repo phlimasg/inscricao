@@ -16,6 +16,7 @@ use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use Mpdf\Mpdf;
 use Illuminate\Support\Str;
 
@@ -27,17 +28,19 @@ class inscricaoController extends Controller
         //dd($request->all());//, $respfin,$firstname,$lastname, $candidato);
 
         $request->validate([
-            'nome' => 'required|string',
-            'numero' => 'required|numeric',
-            'cod' => 'required|numeric',
-            'mes' => 'required|numeric|max:99',
-            'ano' => 'required|numeric|max:9999',
+            'avaliacao_id'=>'required|numeric',
+            'avaliacao_id' => 'required|numeric',
+            'nome' => 'sometimes|required|string',
+            'numero' => 'sometimes|required|numeric',
+            'cod' => 'sometimes|required|numeric',
+            'mes' => 'sometimes|required|numeric|max:99',
+            'ano' => 'sometimes|required|numeric|max:9999',
         ], [
-            'string' => 'Somente texto',
+            /*'string' => 'Somente texto',
             'numeric' => 'Somente números.',
-            'required' => 'Campo obrigatório'
+            'required' => 'Campo obrigatório'*/
         ]);
-
+        //dd($request->all(),Session::get('aluno'));
         try {
             $respfin = respFin::where('cpf', $request->cpf)->first();
             $candidato = candidato::find($request->id_candidato);
@@ -58,6 +61,7 @@ class inscricaoController extends Controller
                 $i->CANDIDATO_ID = $request->id_candidato;
                 $i->AVALIACAO_ID = $request->avaliacao_id;
                 $i->PAGAMENTO = 1;
+                empty(Session::get('aluno'))?$i->TIPO = 'nova/cartão' : $i->tipo = 'irmao';
                 $i->PAGAMENTO_DATA = date('Y-m-d');
                 $i->save();
                 $candidato = candidato::where('id', $request->id_candidato)->first();
@@ -69,92 +73,95 @@ class inscricaoController extends Controller
             } else
                 return 'erro';
 
-            $amount = '50.00';
-            $inscricao_id = 0;
-            $amount = str_replace('.', '', number_format($amount, 2, '.', ''));
-
-            $client = new \GuzzleHttp\Client();
-            $response = $client->post(
-                env('GETNET_URL_API_EVENTOS') . '/v1/payments/credit',
-                [
-                    'headers' => [
-                        'Accept' => 'application/json, text/plain, */*',
-                        'authorization' => 'Bearer ' . $this->TokenGenerate()->access_token,
-                        'content-type' => 'application/json; charset=utf-8',
-                    ],
-                    'json' => [
-                        'seller_id' => env('GETNET_SELLER_ID_EVENTOS'),
-                        //'currency' => '',
-                        'amount' => $amount,
-                        'order' => [
-                            'order_id' => 'Inscricao_alunos-novos-' . date('Y') . '-' . $inscricao_id,
-                            //'sales_tax' => '0',
-                            //'product_type' => 'service',
+            if(empty(Session::get('aluno'))){
+                $amount = '50.00';
+                $inscricao_id = 0;
+                $amount = str_replace('.', '', number_format($amount, 2, '.', ''));
+    
+                $client = new \GuzzleHttp\Client();
+                $response = $client->post(
+                    env('GETNET_URL_API_EVENTOS') . '/v1/payments/credit',
+                    [
+                        'headers' => [
+                            'Accept' => 'application/json, text/plain, */*',
+                            'authorization' => 'Bearer ' . $this->TokenGenerate()->access_token,
+                            'content-type' => 'application/json; charset=utf-8',
                         ],
-                        'customer' => [
-                            'customer_id' => $request->nome,
-                            'first_name' => $firstname,
-                            'last_name' => $lastname,
-                            //'name' => $request->firstname.' '.$request->lastname,
-                            'billing_address' => [
-                                'street' => $rua,
-                                'number' => $num,
-                                //'complement'=> 'Sala 1',
-                                'district' => $bairro,
-                                'city' => $cidade,
-                                'state' => $uf,
-                                'country' => 'Brasil',
-                                'postal_code' => str_replace('-', '', $cep)
+                        'json' => [
+                            'seller_id' => env('GETNET_SELLER_ID_EVENTOS'),
+                            //'currency' => '',
+                            'amount' => $amount,
+                            'order' => [
+                                'order_id' => 'Inscricao_alunos-novos-' . date('Y') . '-' . $inscricao_id,
+                                //'sales_tax' => '0',
+                                //'product_type' => 'service',
                             ],
-                        ],
-                        'device' => [
-                            'ip_address' => request()->ip(),
-                        ],
-                        /*'shippings'=> [                            
-                            'address'=> [],
-                        ],*/
-                        'credit' => [
-                            'delayed' => false,
-                            'save_card_data' => false,
-                            'transaction_type' => 'FULL',
-                            'number_installments' => 1,
-                            //'authenticated'=> false,
-                            //'pre_authorization'=> false,
-                            'soft_descriptor' => 'Inscrição de alunos novos ' . $inscricao_id,
-                            //'dynamic_mcc'=> 1799,
-                            'card' => [
-                                'number_token' => $this->CardTokenizer($request->numero)->number_token,
-                                'cardholder_name' => $request->nome,
-                                'expiration_month' => $request->mes,
-                                'expiration_year' => $request->ano,
-                                'security_code' => $request->cod,
-                                //'brand'=>'mastercard'
+                            'customer' => [
+                                'customer_id' => $request->nome,
+                                'first_name' => $firstname,
+                                'last_name' => $lastname,
+                                //'name' => $request->firstname.' '.$request->lastname,
+                                'billing_address' => [
+                                    'street' => $rua,
+                                    'number' => $num,
+                                    //'complement'=> 'Sala 1',
+                                    'district' => $bairro,
+                                    'city' => $cidade,
+                                    'state' => $uf,
+                                    'country' => 'Brasil',
+                                    'postal_code' => str_replace('-', '', $cep)
+                                ],
                             ],
-                        ],
+                            'device' => [
+                                'ip_address' => request()->ip(),
+                            ],
+                            /*'shippings'=> [                            
+                                'address'=> [],
+                            ],*/
+                            'credit' => [
+                                'delayed' => false,
+                                'save_card_data' => false,
+                                'transaction_type' => 'FULL',
+                                'number_installments' => 1,
+                                //'authenticated'=> false,
+                                //'pre_authorization'=> false,
+                                'soft_descriptor' => 'Inscrição de alunos novos ' . $inscricao_id,
+                                //'dynamic_mcc'=> 1799,
+                                'card' => [
+                                    'number_token' => $this->CardTokenizer($request->numero)->number_token,
+                                    'cardholder_name' => $request->nome,
+                                    'expiration_month' => $request->mes,
+                                    'expiration_year' => $request->ano,
+                                    'security_code' => $request->cod,
+                                    //'brand'=>'mastercard'
+                                ],
+                            ],
+                        ]
                     ]
-                ]
-            );
-            $retorno = json_decode($response->getBody()->getContents());
-            $retorno->code = $response->getStatusCode();
-            //dd($retorno);
+                );
+                $retorno = json_decode($response->getBody()->getContents());
+                $retorno->code = $response->getStatusCode();
+                //dd($retorno);
+    
+                $getnet = new GetnetReturn();
+                $getnet->payment_id = $retorno->payment_id;
+                $getnet->seller_id = $retorno->seller_id;
+                $getnet->amount = $retorno->amount;
+                $getnet->order_id = $retorno->order_id;
+                $getnet->status = $retorno->status;
+                $getnet->received_at = $retorno->received_at;
+                $getnet->authorization_code = $retorno->credit->authorization_code;
+                $getnet->authorized_at = $retorno->credit->authorized_at;
+                $getnet->reason_message = $retorno->credit->reason_message;
+                $getnet->acquirer = $retorno->credit->acquirer;
+                $getnet->soft_descriptor = $retorno->credit->soft_descriptor;
+                $getnet->acquirer_transaction_id = $retorno->credit->acquirer_transaction_id;
+                $getnet->transaction_id = $retorno->credit->transaction_id;
+                $getnet->code = $retorno->code;
+                $getnet->inscricaos_id = $i->id;
+                $getnet->save();
 
-            $getnet = new GetnetReturn();
-            $getnet->payment_id = $retorno->payment_id;
-            $getnet->seller_id = $retorno->seller_id;
-            $getnet->amount = $retorno->amount;
-            $getnet->order_id = $retorno->order_id;
-            $getnet->status = $retorno->status;
-            $getnet->received_at = $retorno->received_at;
-            $getnet->authorization_code = $retorno->credit->authorization_code;
-            $getnet->authorized_at = $retorno->credit->authorized_at;
-            $getnet->reason_message = $retorno->credit->reason_message;
-            $getnet->acquirer = $retorno->credit->acquirer;
-            $getnet->soft_descriptor = $retorno->credit->soft_descriptor;
-            $getnet->acquirer_transaction_id = $retorno->credit->acquirer_transaction_id;
-            $getnet->transaction_id = $retorno->credit->transaction_id;
-            $getnet->code = $retorno->code;
-            $getnet->inscricaos_id = $i->id;
-            $getnet->save();
+            }
             //Mail::to($candidato->FINMAIL)->queue(new InscricaoConcluido($candidato));
             //dd($i);
             $candidato->token = null;
@@ -179,6 +186,8 @@ class inscricaoController extends Controller
     public function concluido($id)
     {
         //dd($id);
+        Session::forget('aluno');
+
         $c = inscricaoView::where('NINSC', $id)
             ->groupBy('id')
             ->first();

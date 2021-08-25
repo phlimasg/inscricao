@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\alunosGv;
 use App\Model\candidato;
 use App\Model\inscricao;
 use App\Model\inscricaoView;
 use App\Model\respFin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class respFinController extends Controller
 {
@@ -58,6 +60,7 @@ class respFinController extends Controller
 
     }
     public function index($cpf){
+        //dd(Session::get('aluno'));
         return view('public.respfin', compact('cpf'));
     }
     public function save(REQUEST $request, $cpf){
@@ -93,5 +96,26 @@ class respFinController extends Controller
             ->get();
         //dd($insc);
         return view('public.painel',compact(['cpf','insc']));
+    }
+
+    public function loginIrmaos(Request $request)
+    {
+        $request->validate([
+            'ra' => 'numeric|required'
+        ],
+        [
+            'numeric' => 'Por favor, insira somente números.',
+            'required' => 'Campo obrigatório.'
+        ]);
+        $ra = alunosGv::where('ra',$request->ra)
+        ->where('RESPFINCPF',str_replace('.','',str_replace('-','',$request->cpf)))
+        ->where('SITUACAO','ativo')
+        ->first();
+        //dd(str_replace('.','',str_replace('-','',$request->cpf)),$ra);
+        if($ra){
+            Session::put('aluno',$ra);            
+            return $this->validaCpf($request);
+        }
+        return redirect()->back()->with('message','Aluno não encontrado');
     }
 }

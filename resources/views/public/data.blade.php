@@ -3,6 +3,20 @@
     <div class="container-fluid title">
         <h1>Reunião com a Coordenação</h1>
     </div>
+    @if ($errors->any())
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-danger">    
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>      
+        </div>
+    @endif
+                
     <form action="{{route('inscrever')}}" method="post" id="form">
         <input type="text" value="{{$cpf}}" hidden name="cpf">
         <input type="text" value="{{$id_candidato}}" hidden name="id_candidato">
@@ -36,70 +50,79 @@
                            </select>
                        </div>
                    </div>
-<h3>                   <i class="fa fa-credit-card"></i> Dados para pagamentos com cartão de crédito: </h3>                   
+                   @if (empty(Session::get('aluno')))
+                       
+                        <h3><i class="fa fa-credit-card"></i> Dados para pagamentos com cartão de crédito: </h3>                   
                         <div class="row">
-                          <div class="col-sm-12">
-                            <h2 class=""><b>Valor: R$ 50,00</b></h2>  
-                          </div>
-                          @if(session('error'))
-                          <div class="row">
                             <div class="col-sm-12">
-                                <div class="alert alert-danger">
-                                    <b>ERRO NO PAGAMENTO, TENTE NOVAMENTE</b>                                    
-                                    
-                                    <p>Mensagem: {{session('error')['message']}}</p>
-                                    <p>Código de erro:{{session('error')['status_code']}}</p>
-                                    {!! !empty(session('error')['details'][0]['description'])? '<p>Descrição do erro: '.session('error')['details'][0]['description'].'</p>':''!!}
-                                    {!! !empty(session('error')['details'][0]['description_detail'])? '<p>Detalhes do erro: '.session('error')['details'][0]['description_detail'].'</p>':''!!}
-                                    {!! !empty(session('error')['details'][0]['error_code'])? '<p>Código do operadora: '.session('error')['details'][0]['error_code'].'</p>':''!!}
-                                    {!! !empty(session('error')['details'][0]['antifraud']['status_code'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}                                    
-                                    
-                                </div>
-                            </div>      
-                        </div>  
+                            <h2 class=""><b>Valor: R$ 50,00</b></h2>  
+                            </div>
+                            @if(session('error'))
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="alert alert-danger">
+                                        <b>ERRO NO PAGAMENTO, TENTE NOVAMENTE</b>                                    
+                                        
+                                        <p>Mensagem: {{session('error')['message']}}</p>
+                                        <p>Código de erro:{{session('error')['status_code']}}</p>
+                                        {!! !empty(session('error')['details'][0]['description'])? '<p>Descrição do erro: '.session('error')['details'][0]['description'].'</p>':''!!}
+                                        {!! !empty(session('error')['details'][0]['description_detail'])? '<p>Detalhes do erro: '.session('error')['details'][0]['description_detail'].'</p>':''!!}
+                                        {!! !empty(session('error')['details'][0]['error_code'])? '<p>Código do operadora: '.session('error')['details'][0]['error_code'].'</p>':''!!}
+                                        {!! !empty(session('error')['details'][0]['antifraud']['status_code'])? '<p>Antifraude: '.session('error')['details'][0]['antifraud']['status_code'].'-'.session('error')['details'][0]['antifraud']['description'].'</p>':''!!}                                    
+                                        
+                                    </div>
+                                </div>      
+                            </div>  
                         @endif
                         </div>   
-                              <div class="row">
-                                  <div class="col-sm-6">
-                                      <label for="">Nome do titular do cartão:</label>
-                                  <input type="text" name="nome" id="" class="form-control" value="{{old('nome')}}">
-                                  
-                                  </div>            
-                              </div>        
-                              
-                          <div class="row">
-                              <div class="col-sm-6">
-                                  <label for="">Número do cartão:</label>
-                                  <input type="text" name="numero" id="" class="form-control" value="{{old('numero')}}">
-                                  
-                              </div>
-                              <div class="col-sm-3">
-                                  <label for="">Código de segurança:</label>
-                                  <input type="text" name="cod" id="" class="form-control" value="{{old('cod')}}" maxlength="4">
-                                  
-                              </div>                      
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-4">
-                                  <label for="">Data de validade:</label>                
-                              </div>               
-                          </div>
-                          <div class="row">
-                              <div class="col-sm-2">
-                                  <label for="">Mês:</label>
-                                  <input type="text" name="mes" id="" class="form-control" value="{{old('mes')}}" max="99" maxlength="2">
-                                  
-                              </div>
-                              <div class="col-sm-2">
-                                  <label for="">Ano:</label>
-                                  <input type="text" name="ano" id="" class="form-control" value="{{old('ano')}}" max="{{date('Y')+10}}" maxlength="4">
-                                  
-                              </div>
-                          </div>                           
-                                      <hr>                              
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <label for="">Nome do titular do cartão:</label>
+                                    <input type="text" name="nome" id="" class="form-control" value="{{old('nome')}}">
+                                    
+                                    </div>            
+                                </div>        
+                                
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <label for="">Número do cartão:</label>
+                                    <input type="text" name="numero" id="" class="form-control" value="{{old('numero')}}">
+                                    
+                                </div>
+                                <div class="col-sm-3">
+                                    <label for="">Código de segurança:</label>
+                                    <input type="text" name="cod" id="" class="form-control" value="{{old('cod')}}" maxlength="4">
+                                    
+                                </div>                      
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="">Data de validade:</label>                
+                                </div>               
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="">Mês:</label>
+                                    <input type="text" name="mes" id="" class="form-control" value="{{old('mes')}}" max="99" maxlength="2">
+                                    
+                                </div>
+                                <div class="col-sm-2">
+                                    <label for="">Ano:</label>
+                                    <input type="text" name="ano" id="" class="form-control" value="{{old('ano')}}" max="{{date('Y')+10}}" maxlength="4">
+                                    
+                                </div>
+                            </div>                           
+                                        <hr>                              
+                   @endif
                               <div class="row text-center">                    
-                                  <div class="col-sm-12">
-                                      <button type="submit" class="btn btn-success btn-lg btn-block" ><i class="fa fa-credit-card"></i> Efetuar pagamento e finalizar</button>
+                                  <div class="col-sm-12" style="margin-top: 15px;">
+                                        <button type="submit" class="btn btn-success btn-lg btn-block" >
+                                            @if (empty(Session::get('aluno')))
+                                                <i class="fa fa-credit-card"></i> Efetuar pagamento e finalizar
+                                            @else
+                                                <i class="fa fa-users"></i> Finalizar Inscrição
+                                            @endif
+                                        </button>
                                   </div>                    
                               </div>  
                       </div>

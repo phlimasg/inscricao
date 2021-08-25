@@ -11,11 +11,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('public.login');
-});
+
+use Illuminate\Support\Facades\Auth;
+
+Route::get('/', 'inicioController@index');
 
 Route::post('/validaCpf', 'respFinController@validaCpf')->name('validaCpf');
+Route::post('/loginIrmaos', 'respFinController@loginIrmaos')->name('loginIrmaos');
 Route::get('/lista_de_espera/{token}','candidatoController@listaDeEspera')->name('espera.token');
 Route::group(['prefix'=>'/inscricao'], function (){
     Route::get('/{cpf}/respfin','respFinController@index');
@@ -43,6 +45,9 @@ Route::get('/painel/{cpf}','respFinController@painel');
 
 
 Route::group(['prefix'=>'/home'], function (){
+    if(env('APP') != 'production'){
+        Auth::loginUsingId(1);
+    }
     Route::get('avaliacao','avaliacaoController@index')->name('avIndex');
     Route::post('avaliacao','avaliacaoController@save');
     Route::get('avaliacao/delete/{id}','avaliacaoController@destroy');

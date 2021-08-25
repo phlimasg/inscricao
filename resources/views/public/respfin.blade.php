@@ -17,21 +17,22 @@
                    <div class="row">
                        <div class="col-sm-9">
                            <label for="">Nome:</label>
-                           <input type="text" required class="form-control" autofocus name="nome">
+                           <input type="text" required class="form-control" autofocus name="nome" value="@if (Session::get('aluno')){{Session::get('aluno')->RESPFIN}} @else {{old('nome')}} @endif">
                        </div>
                        <div class="col-sm-3">
-                           <label for="">Data de Nascimento:</label>
-                           <input type="date" required class="form-control" name="data" >
+                           <label for="">Data de Nascimento:</label>                           
+                           
+                           <input type="date" required class="form-control" name="data" value="@if (Session::get('aluno')){{date('Y-m-d',strtotime(str_replace('/','-',Session::get('aluno')->RESPFINDTNASCIMENTO)))}}@else{{old('data')}}@endif">
                        </div>
                    </div>
                    <div class="row">
                        <div class="col-sm-3">
                            <label for="">Telefone:</label>
-                           <input type="text" required class="form-control"  id="tel" name="tel">
+                           <input type="text" required class="form-control"  id="tel" name="tel" value="@if (Session::get('aluno')){{Session::get('aluno')->RESPFINTELCEL}} @else {{old('tel')}} @endif">
                        </div>
                        <div class="col-sm-9">
                            <label for="">email:</label>
-                           <input type="email" required class="form-control" name="email" >
+                           <input type="email" required class="form-control" name="email" value="@if (Session::get('aluno')){{Session::get('aluno')->RESPFINEMAIL}} @else {{old('email')}} @endif">
                        </div>
                    </div>
                     <hr>
