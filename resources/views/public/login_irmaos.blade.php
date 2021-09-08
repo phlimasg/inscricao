@@ -10,7 +10,7 @@
                @csrf
                <div class="row">
                 <div class="text-center">
-                    <label for="">Insira a matricula do aluno:</label>
+                    <label for="">INSIRA A MATRICULA DO IRMÃO QUE JÁ É ALUNO:</label>
                 </div>
             </div>
             <div class="row">

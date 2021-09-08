@@ -8,28 +8,29 @@
            <div class="row">
                <div class="col-sm-12">
                    Prezado(a) {{$c->FINNOME}}, <br><br>
-                   Confirmamos os dados para a inscrição do aluno(a) {{$c->CNOME}}.<br>
+                   CONFIRMAMOS OS DADOS PARA A INSCRIÇÃO DO ALUNO(A) {{$c->CNOME}}.<br>
                    <div style="color: #003c7f; background: white; padding: 15px">                       
-                    A AVALIAÇÃO DIAGNÓSTICA PARA 2021 SERÁ REALIZADA DE FORMA DIFERENTE DOS ANOS ANTERIORES, POR ISSO, FIQUE ATENTO(A) ÀS ETAPAS DO PROCESSO:
+                    A AVALIAÇÃO DIAGNÓSTICA PARA 2022 SERÁ REALIZADA DE FORMA DIFERENTE DOS ANOS ANTERIORES, POR ISSO, FIQUE ATENTO(A) ÀS ETAPAS DO PROCESSO:
                     <br>
+                    <br>
+                    <b>Passo 1</b> - RESERVA DE VAGA COM O PAGAMENTO DA TAXA - R$60,00 
+                    Durante a reserva de vaga, agendaremos a avaliação presencial e a reunião de responsáveis com a coordenação do segmento. 
+                    Neste processo seletivo teremos 2 tipos de avaliação para o ingresso:
                     <ul>
-                        <li>RESERVA DE VAGA COM O PAGAMENTO DA TAXA - R$50,00
+                        <li><b>Avaliação diagnóstica</b> para os alunos do Pré I e Pré II, da Educação Infantil e para os alunos do  Fundamental I e II - 1º ao 9º ano.
                         </li>
                         <li>
-                            AVALIAÇÃO DOS DOCUMENTOS ENVIADOS NO MOMENTO DA INSCRIÇÃO
+                            <b>Teste de seleção</b> para os alunos do Ensino Médio - com média mínima 6,0(seis). Os candidatos com notas inferiores a 5,9 terão os testes reavaliados ou encaminhados para realizar uma nova inscrição e um novo teste.
                         </li>
                         <li>
-                            ENVIO DO KIT DE MATRÍCULA PARA O ENDEREÇO CADASTRADO NO FORMULÁRIO                            
-                        </li>
-                        <li>
-                            REUNIÃO ONLINE COM A COORDENAÇÃO PEDAGÓGICA                            
-                        </li>
-                        <li>
-                            MATRÍCULA E ENTREGA DE DOCUMENTOS PRESENCIAL(AGENDADA), CONFORME CALENDÁRIO. 
-                        </li>
+                            <b>Creche II e Creche III</b> - Os candidatos não participarão da Avaliação Diagnóstica, apenas os responsáveis participarão da reunião com a coordenação no dia agendado.                         
+                        </li>                      
                     </ul>
-
-                       A reunião ocorrerá no dia @if($c->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($c->DTPROVA))}} AS {{$c->HORAPROVA}}@endif.                       
+                    <b>Passo 2</b> - AVALIAÇÃO DOS DOCUMENTOS ENVIADOS NO MOMENTO DA INSCRIÇÃO <br>
+                    <b>Passo 3</b> - Realização da avaliação, reunião com a coordenação pedagógica do segmento e retirada do kit de matrícula.<br>
+                    <b>Passo 4</b> - Confirmação de aprovação e agendamento para a matrícula presencial.<br>
+                    <b>Passo 5</b> - MATRÍCULA E ENTREGA DE DOCUMENTOS PRESENCIAL(AGENDADA), CONFORME CALENDÁRIO.<br>
+                    A AVALIAÇÃO E A  REUNIÃO COM A COORDENAÇÃO OCORRERÃO NO @if($c->DTPROVA=="2020-06-07")agendado na secretaria @else{{date('d/m/Y', strtotime($c->DTPROVA))}} AS {{$c->HORAPROVA}}@endif.                       
                    </div>
 <!--
                    <div>
@@ -40,13 +41,7 @@
                    <br>
                 -->
 
-                <br>                   
-                   <p><b>ENVIO DO KIT DE MATRÍCULA </b></p>
-                   <p>O KIT DE MATRÍCULAS, QUE CONTÉM  OS DOCUMENTOS NECESSÁRIOS PARA O INGRESSO, SERÁ ENVIADO AO ENDEREÇO CADASTRADO NO MOMENTO DO PREENCHIMENTO DA FICHA, NA SEMANA DA REUNIÃO COM A COORDENAÇÃO PEDAGÓGICA.</p>
-                   <br>
-                   <p><b>REUNIÃO COM A COORDENAÇÃO PEDAGÓGICA</b></p>
-                   <p>A REUNIÃO COM A COORDENAÇÃO PEDAGÓGICA SERÁ VIRTUAL, O LINK DE ACESSO SERÁ ENVIADO PARA AS FAMÍLIAS NOS DIAS QUE ANTECEDEM O ENCONTRO. NA DATA E HORÁRIO MARCADOS APRESENTAREMOS A PROPOSTA PEDAGÓGICA DA ESCOLA E DO SEGMENTO, ALÉM DE INFORMAR A DATA EM QUE OS FORMULÁRIOS ESTARÃO DISPONÍVEIS PARA A MATRÍCULA.</p>
-                   <br>
+                <br>                                      
                    <p><b>MATRÍCULA PRESENCIAL </b></p>
                    <p>A MATRÍCULA SERÁ PRESENCIAL AGENDADA. OS FORMULÁRIOS DEVEM SER PREENCHIDOS ANTECIPADAMENTE E ANEXADOS AOS DOCUMENTOS NECESSÁRIOS PARA A MATRÍCULA, QUE SEGUEM ABAIXO:</p>
                    <br>
@@ -74,7 +69,7 @@
                    <p>LOCAL: R. MARIO ALVES, 2 - ICARAÍ</p>                   
                    <br>
                    <b>ATENÇÃO:</b>
-                   1. APRESENTAÇÃO DO RESULTADO FINAL DO CANDIDATO (BOLETIM OU DECLARAÇÃO ATÉ O DIA 21 DE DEZEMBRO), CASO CONTRÁRIO O ALUNO NÃO SERÁ ENTURMADO. <br>
+                   1. APRESENTAÇÃO DO RESULTADO FINAL DO CANDIDATO (BOLETIM OU DECLARAÇÃO ATÉ O DIA 23 DE DEZEMBRO), CASO CONTRÁRIO O ALUNO NÃO SERÁ ENTURMADO. <br>
                    2. ESCLARECEMOS QUE, DE ACORDO COM A LEGISLAÇÃO VIGENTE, A MATRÍCULA SERÁ EFETIVADA APÓS A ENTREGA DA TRANSFERÊNCIA (HISTÓRICO ESCOLAR ORIGINAL).<br>
                    3. A VAGA SÓ PERMANECERÁ RESERVADA ATÉ O ÚLTIMO DIA DE MATRÍCULA DO PERÍODO CORRESPONDENTE, INFORMADO NO FORMULÁRIO ENTREGUE JUNTO DO KIT DE MATRÍCULAS. CASO A DATA SEJA PERDIDA, A VAGA VOLTA PARA A CONCORRÊNCIA ABERTA. POR ISSO, FIQUE ATENTO(A) AOS PRAZOS.<br>
                    <br>                   
