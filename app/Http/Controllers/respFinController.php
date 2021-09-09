@@ -6,6 +6,7 @@ use App\Model\alunosGv;
 use App\Model\candidato;
 use App\Model\inscricao;
 use App\Model\inscricaoView;
+use App\Model\respAcad;
 use App\Model\respFin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -51,13 +52,14 @@ class respFinController extends Controller
             ]
         );
         $value = preg_replace("/[^0-9]/", "", $request->cpf);
+        //dd($value,respFin::where('CPF',$value)->first());        
+        
         if(respFin::where('CPF',$value)->first() == null || !empty(Session::get('aluno'))){
-            if(!empty(Session::get('aluno'))){
+            if(respFin::where('CPF',$value)->first() != null)
                 return redirect(url('/inscricao/'.$value.'/respacad'));
-            }
             return redirect(url('/inscricao/'.$value.'/respfin'));
         }
-        else{
+        elseif(respFin::where('CPF',$value)->first() != null && respAcad::where('RESPFINCPF',$value)->first() != null){
             return redirect(url('/painel/'.$value));
         }
 
