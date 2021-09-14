@@ -74,7 +74,7 @@ class inscricaoController extends Controller
                 return 'erro';
 
             if(empty(Session::get('aluno'))){
-                $amount = '50.00';
+                $amount = '60.00';
                 $inscricao_id = 0;
                 $amount = str_replace('.', '', number_format($amount, 2, '.', ''));
     

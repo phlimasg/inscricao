@@ -18,7 +18,7 @@
                 @if (!empty($candidato_espera->INTEGRAL_ID))
                     COMPLEMENTAR<br>
                 @endif
-                Prova dia:  @if($insc->DTPROVA=="2020-06-07")agendado na secretaria. @else{{date('d/m/Y', strtotime($insc->DTPROVA))}} AS 9H. @endif
+                Prova dia:  @if($insc->DTPROVA=="2020-06-07")agendado na secretaria. @else{{date('d/m/Y', strtotime($insc->DTPROVA))}} AS {{$insc->HORAPROVA}}. @endif
         </tr>
     </table>
     <div align="center" class="title">
