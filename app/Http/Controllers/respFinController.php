@@ -59,7 +59,7 @@ class respFinController extends Controller
                 return redirect(url('/inscricao/'.$value.'/respacad'));
             return redirect(url('/inscricao/'.$value.'/respfin'));
         }
-        elseif(respFin::where('CPF',$value)->first() != null && respAcad::where('RESPFINCPF',$value)->first() != null){
+        elseif(respFin::where('CPF',$value)->first() != null && respAcad::where('RESPFIN_CPF',$value)->first() != null){
             return redirect(url('/painel/'.$value));
         }
 

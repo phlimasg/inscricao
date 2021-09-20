@@ -57,7 +57,7 @@
                         <h3><i class="fa fa-credit-card"></i> Dados para pagamentos com cartão de crédito: </h3>                   
                         <div class="row">
                             <div class="col-sm-12">
-                            <h2 class=""><b>Valor: R$ 50,00</b></h2>  
+                            <h2 class=""><b>Valor: R$ 60,00</b></h2>  
                             </div>
                             @if(session('error'))
                             <div class="row">
