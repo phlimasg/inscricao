@@ -40,8 +40,8 @@
     </div>
     <div class="row">
         <div class="col-sm-3">
-            <!--<a href="{{url('/inscricao/'.$cpf.'/respacad')}}"> <button class="btn btn-lg btn-danger">NOVO CANDIDATO</button></a>-->
-            <a href="{{url('/')}}"> <button class="btn btn-lg btn-danger">NOVO CANDIDATO</button></a>
+            <a href="{{url('/inscricao/'.$cpf.'/respacad')}}"> <button class="btn btn-lg btn-danger">NOVO CANDIDATO</button></a>
+            <!--<a href="{{url('/')}}"> <button class="btn btn-lg btn-danger">NOVO CANDIDATO</button></a>-->
         </div>
     </div>
 </div>
