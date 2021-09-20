@@ -163,7 +163,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <label for="">Boletim primeiro semestre de 2020 - (Obrigatório a Partir do 2º ano)</label>
+                            <label for="">Boletim primeiro semestre de {{date('Y')}} - (Obrigatório a Partir do 2º ano)</label>
                             <input type="file" name="documento_opcional[]" id="" max-size="5000" class="form-control" required accept="image/jpg, image/jpeg, application/pdf">
                             <small>Max. de 5Mb</small>
                         </div>
