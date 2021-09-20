@@ -52,16 +52,16 @@ class respFinController extends Controller
             ]
         );
         $value = preg_replace("/[^0-9]/", "", $request->cpf);
-        //dd($value,respFin::where('CPF',$value)->first());        
-        
-        if(respFin::where('CPF',$value)->first() == null || !empty(Session::get('aluno'))){
-            if(respFin::where('CPF',$value)->first() != null)
-                return redirect(url('/inscricao/'.$value.'/respacad'));
+        //dd($value,respFin::where('CPF',$value)->first(), !empty(respFin::where('CPF',$value)->first()));        
+        $respFin = respFin::where('CPF',$value)->first();
+        if($respFin == null || !empty(Session::get('aluno'))){
             return redirect(url('/inscricao/'.$value.'/respfin'));
-        }
-        elseif(respFin::where('CPF',$value)->first() != null && respAcad::where('RESPFIN_CPF',$value)->first() != null){
+        }        
+        if($respFin != null && respAcad::where('RESPFIN_CPF',$value)->first() != null){
             return redirect(url('/painel/'.$value));
         }
+        if(!empty($respFin))
+            return redirect(url('/inscricao/'.$value.'/respacad'));
 
     }
     public function index($cpf){
