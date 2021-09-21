@@ -104,7 +104,7 @@ class candidatoController extends Controller
         $qtd = inscricaoQtdView::selectRaw('(QTD_VAGAS-QTD_INSCRITOS) AS VAGAS')
             ->where('ID', $esc_id->ESCOLARIDADE_ID)
             ->first();
-        //dd($esc_id,$esc_vag,$qtd);
+       // dd($esc_id,$esc_vag,$qtd);
         if ($esc_id->INTEGRAL_ID == null) {
             if ($esc_vag->QTD_VAGAS > 0) {
                 if ($qtd == null or $qtd->VAGAS > 0) {
@@ -133,12 +133,13 @@ class candidatoController extends Controller
             if ($esc_vag->QTD_VAGAS > 0) {
                 if ($qtd == null or $qtd->VAGAS > 0) {
                     $a = avaliacao::where('DTLIMITE_INSC', '>', date('Y-m-d'))
+                        ->where('ESCOLARIDADE_ID',$esc_id->ESCOLARIDADE_ID)
                         ->orderBy('DTLIMITE_INSC')
                         ->limit(1)
                         ->get();
 
                     if ($vagas_integral->vagas > 0) {
-                        //dd($candidato);
+                        //dd('ret');
                         $integral_insc = integral_insc::where('id', $esc_id->INTEGRAL_ID)->first();
                         if ($integral_insc != null) {
                             if (($vagas_integral->vagas - $integral_insc->qtd_inscritos) <= 0) {
@@ -164,6 +165,7 @@ class candidatoController extends Controller
                     $candidato->espera = 1;
                     $candidato->INTEGRAL_ESPERA = 1;
                     $candidato->save();
+                    //dd('ret');
                     return view('public.esgotado', compact(['a', 'cpf', 'id_candidato']));
                 }
             } else {
@@ -171,6 +173,7 @@ class candidatoController extends Controller
                 $candidato->espera = 1;
                 $candidato->INTEGRAL_ESPERA = 1;
                 $candidato->save();
+                //dd('ret');
                 return view('public.esgotado', compact(['a', 'cpf', 'id_candidato']));
             }
         }

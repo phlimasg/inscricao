@@ -43,7 +43,7 @@
                                         <option selected value="{{$dia->id}}">{{date('d/m/Y', strtotime($dia->DTPROVA))}} AS {{$dia->HORAPROVA}} </option>                                         
                                     @endif
                                     @php
-                                        break;
+                                        //break;
                                     @endphp                              
                                 @endif
                                @endforeach
