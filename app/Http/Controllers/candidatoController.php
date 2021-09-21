@@ -111,7 +111,7 @@ class candidatoController extends Controller
                     $a = avaliacao::where('DTLIMITE_INSC', '>=', date('Y-m-d'))
                         ->where('ESCOLARIDADE_ID',$esc_id->ESCOLARIDADE_ID)
                         ->orderBy('DTLIMITE_INSC')
-                        ->limit(1)
+                        //->limit(1)
                         ->get();
                       //  ->first();
                     //dd($a->qtdInscritos()->count());
